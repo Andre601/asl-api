@@ -14,13 +14,13 @@ repositories {
 }
 
 dependencies {
-    implementation 'com.github.Andre601.asl-api:api:{version}'
+    implementation 'ch.andre601.asl-api:api:{version}'
     
     // Optional platform-specific dependencies. Read more below
-    implementation 'com.github.Andre601.asl-api:platform-bungeecord:{version}'
-    implementation 'com.github.Andre601.asl-api:platform-paper:{version}'
-    implementation 'com.github.Andre601.asl-api:platform-spigot:{version}'
-    implementation 'com.github.Andre601.asl-api:platform-velocity:{version}'
+    implementation 'ch.andre601.asl-api:platform-bungeecord:{version}'
+    implementation 'ch.andre601.asl-api:platform-paper:{version}'
+    implementation 'ch.andre601.asl-api:platform-spigot:{version}'
+    implementation 'ch.andre601.asl-api:platform-velocity:{version}'
 }
 ```
 
@@ -36,29 +36,29 @@ dependencies {
 
 <dependencies>
   <dependency>
-      <groupId>com.github.Andre601.asl-api</groupId>
+      <groupId>ch.andre601.asl-api</groupId>
       <artifactId>api</artifactId>
       <version>{version}</version>
   </dependency>
   
   <!-- Optional platform-specific dependencies. Read more below -->
   <dependency>
-      <groupId>com.github.Andre601.asl-api</groupId>
+      <groupId>ch.andre601.asl-api</groupId>
       <artifactId>platform-bungeecord</artifactId>
       <version>{version}</version>
   </dependency>
   <dependency>
-      <groupId>com.github.Andre601.asl-api</groupId>
+      <groupId>ch.andre601.asl-api</groupId>
       <artifactId>platform-paper</artifactId>
       <version>{version}</version>
   </dependency>
   <dependency>
-      <groupId>com.github.Andre601.asl-api</groupId>
+      <groupId>ch.andre601.asl-api</groupId>
       <artifactId>platform-spigot</artifactId>
       <version>{version}</version>
   </dependency>
   <dependency>
-      <groupId>com.github.Andre601.asl-api</groupId>
+      <groupId>ch.andre601.asl-api</groupId>
       <artifactId>platform-velocity</artifactId>
       <version>{version}</version>
   </dependency>
