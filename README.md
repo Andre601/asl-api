@@ -4,6 +4,8 @@ This repository was made to host the classes provided by the AdvancedServerList 
 
 ## Get dependency
 
+Please replace `{version}` with the latest version available in this repository.
+
 ### Gradle
 
 ```groovy
