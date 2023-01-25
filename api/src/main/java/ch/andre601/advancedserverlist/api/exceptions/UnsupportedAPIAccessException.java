@@ -26,8 +26,9 @@
 package ch.andre601.advancedserverlist.api.exceptions;
 
 /**
- * RuntimeException thrown when any of the {@link ch.andre601.advancedserverlist.api.AdvancedServerListAPI AdvancedServerListAPI methods}
- * are called while no plugin instance with the API is present.
+ * RuntimeException thrown when any of the methods in this API are called while AdvancedServerList isn't present.
+ * <br>While the various methods are filled with this exception should it not throw if the plugin is present, as the
+ * methods of the API in the plugin actually have the right values.
  */
 public class UnsupportedAPIAccessException extends RuntimeException{
     

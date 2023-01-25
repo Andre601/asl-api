@@ -23,52 +23,48 @@
  *
  */
 
-package ch.andre601.advancedserverlist.core.objects;
+package ch.andre601.advancedserverlist.api.events;
 
-import java.util.UUID;
+import ch.andre601.advancedserverlist.api.profiles.ProfileEntry;
 
 /**
- * This class is used by Gson to convert JSON entries in the plugin's playerdata.json to usable classes containing
- * information to later use for things such as placeholders.
- * <br>A CachedPlayer is also created when a player joins while AdvancedServerList is running.
+ * Interface used for the platform-specific PreServerListSetEvent instances.
+ * <br>This allows the plugin to pull common info such as ProfileEntry or if the event has been cancelled by another
+ * plugin.
  */
-@SuppressWarnings("FieldMayBeFinal")
-public class CachedPlayer{
-    
-    private String ip;
-    private String name;
-    private UUID uuid;
-    
-    public CachedPlayer(String ip, String name, UUID uuid){
-        this.ip = ip;
-        this.name = name;
-        this.uuid = uuid;
-    }
+public interface GenericServerListEvent{
     
     /**
-     * The IP the player last joined with.
-     * 
-     * @return String representing the player's IP.
+     * Gets the {@link ProfileEntry} currently set.
+     *
+     * @return The currently set {@link ProfileEntry}
      */
-    public String getIp(){
-        return ip;
-    }
+    ProfileEntry getEntry();
     
     /**
-     * The Minecraft Account name last used by the player.
-     * 
-     * @return Last used Minecraft Account name.
+     * Sets the new {@link ProfileEntry} to use.
+     * <br>This may not be {@code null}.
+     *
+     * @param entry
+     *        The new {@link ProfileEntry} to use.
+     *
+     * @throws IllegalArgumentException
+     *         When the provided ProfileEntry is null.
      */
-    public String getName(){
-        return name;
-    }
+    void setEntry(ProfileEntry entry);
     
     /**
-     * The UUID associated with the Minecraft Account.
-     * 
-     * @return UUID of the Minecraft Account.
+     * Returns whether this event has been cancelled or not.
+     *
+     * @return Whether the event has been cancelled or not.
      */
-    public UUID getUuid(){
-        return uuid;
-    }
+    boolean isCancelled();
+    
+    /**
+     * Sets the event's cancel state.
+     *
+     * @param cancelled
+     *        Boolean to set the event's cancelled state.
+     */
+    void setCancelled(boolean cancelled);
 }
