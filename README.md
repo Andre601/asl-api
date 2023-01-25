@@ -132,6 +132,18 @@ Please note, that your PlaceholderProvider instance will only be accepted when i
 2. The identifier does not contain any spaces
 3. Another PlaceholderProvider with the same identifier isn't already added.
 
+### Events
+
+v1.1.0 of the API adds the `PreServerListSetEvent` to the different platform dependencies to use.  
+It allows you to modify the ProfileEntry used for the player pinging the server/proxy or even cancelling the event altogether.
+
+### ProfileEntry
+
+The ProfileEntry class has been moved to the API in v1.1.0 allowing you to create your own versions using the available Builder class.
+
+The ProfileEntry is what contains the necessary data from the server list profiles. This can be an entry from the "profiles" list, the settings themselves in the file or a mix of both depending on what options are present.  
+You can create a new entry or copy an existing one (i.e. from the [`PreServerListSetEvent`](#events)) to modify and use in the server list by setting it in the aforementioned `PreServerListSetEvent`.
+
 ## Support
 
 <a href="https://discord.gg/6dazXp6" target="_blank">

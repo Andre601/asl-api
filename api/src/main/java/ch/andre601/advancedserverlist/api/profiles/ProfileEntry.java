@@ -187,7 +187,7 @@ public class ProfileEntry{
     
     /**
      * Whether this ProfileEntry is invalid or not.
-     * <br>The ProfileEntry is considered invalid if all of the following are true:
+     * <br>The ProfileEntry is considered invalid if all the following is true:
      * <ul>
      *     <li>{@link #getMotd() motd} is empty</li>
      *     <li>{@link #getPlayers() players} is empty</li>
@@ -224,7 +224,7 @@ public class ProfileEntry{
          * Sets a new MOTD to use.
          *
          * <p>Set to an empty list to not change the MOTD.
-         * <br>The provided list cannot be null.
+         * <br>The provided list cannot be null. Lists with more than 2 entries will be cut down.
          *
          * @param  motd
          *         The MOTD to use.
@@ -237,6 +237,11 @@ public class ProfileEntry{
         public Builder setMotd(List<String> motd){
             if(motd == null)
                 throw new IllegalArgumentException("motd may not be null.");
+            
+            if(motd.size() > 2){
+                this.motd = motd.subList(0, 2);
+                return this;
+            }
             
             this.motd = motd;
             return this;
