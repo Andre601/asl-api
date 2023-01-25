@@ -25,6 +25,7 @@
 
 package ch.andre601.advancedserverlist.api.profiles;
 
+import ch.andre601.advancedserverlist.api.exceptions.UnsupportedAPIAccessException;
 import ch.andre601.advancedserverlist.api.objects.NullBool;
 
 import java.util.ArrayList;
@@ -40,14 +41,6 @@ import java.util.List;
  * of this class added.
  */
 public class ProfileEntry{
-    
-    private final List<String> motd;
-    private final List<String> players;
-    private final String playerCountText;
-    private final String favicon;
-    private final NullBool hidePlayersEnabled;
-    private final NullBool extraPlayersEnabled;
-    private final Integer extraPlayersCount;
     
     /**
      * Creates a new instance of a ProfileEntry with the given values.
@@ -69,13 +62,7 @@ public class ProfileEntry{
      */
     public ProfileEntry(List<String> motd, List<String> players, String playerCountText, String favicon,
                         NullBool hidePlayersEnabled, NullBool extraPlayersEnabled, Integer extraPlayersCount){
-        this.motd = motd;
-        this.players = players;
-        this.playerCountText = playerCountText;
-        this.favicon = favicon;
-        this.hidePlayersEnabled = hidePlayersEnabled;
-        this.extraPlayersEnabled = extraPlayersEnabled;
-        this.extraPlayersCount = extraPlayersCount;
+        throw new UnsupportedAPIAccessException();
     }
     
     /**
@@ -93,8 +80,7 @@ public class ProfileEntry{
      * @return New ProfileEntry instance with empty/null values defined.
      */
     public static ProfileEntry empty(){
-        return new ProfileEntry(Collections.emptyList(), Collections.emptyList(), "", "",
-            NullBool.NULL, NullBool.NULL, 0);
+        throw new UnsupportedAPIAccessException();
     }
     
     /**
@@ -104,14 +90,7 @@ public class ProfileEntry{
      * @return A new {@link Builder Builder instance} with the values of this ProfileEntry set.
      */
     public Builder copy(){
-        return new Builder()
-            .setMotd(getMotd())
-            .setPlayers(getPlayers())
-            .setPlayerCountText(getPlayerCountText())
-            .setFavicon(favicon)
-            .setHidePlayersEnabled(isHidePlayersEnabled())
-            .setExtraPlayersEnabled(isExtraPlayersEnabled())
-            .setExtraPlayerCount(getExtraPlayersCount());
+        throw new UnsupportedAPIAccessException();
     }
     
     /**
@@ -120,7 +99,7 @@ public class ProfileEntry{
      * @return The current MOTD used by this ProfileEntry.
      */
     public List<String> getMotd(){
-        return motd;
+        throw new UnsupportedAPIAccessException();
     }
     
     /**
@@ -129,7 +108,7 @@ public class ProfileEntry{
      * @return The current list of players used by this ProfileEntry.
      */
     public List<String> getPlayers(){
-        return players;
+        throw new UnsupportedAPIAccessException();
     }
     
     /**
@@ -138,7 +117,7 @@ public class ProfileEntry{
      * @return The current player count text used by this ProfileEntry.
      */
     public String getPlayerCountText(){
-        return playerCountText;
+        throw new UnsupportedAPIAccessException();
     }
     
     /**
@@ -153,7 +132,7 @@ public class ProfileEntry{
      * @return The current favicon used by this ProfileEntry.
      */
     public String getFavicon(){
-        return favicon;
+        throw new UnsupportedAPIAccessException();
     }
     
     /**
@@ -163,7 +142,7 @@ public class ProfileEntry{
      * @return Whether the player count should be hidden or not.
      */
     public NullBool isHidePlayersEnabled(){
-        return hidePlayersEnabled;
+        throw new UnsupportedAPIAccessException();
     }
     
     /**
@@ -173,7 +152,7 @@ public class ProfileEntry{
      * @return Whether the extra players feature should be used or not.
      */
     public NullBool isExtraPlayersEnabled(){
-        return extraPlayersEnabled;
+        throw new UnsupportedAPIAccessException();
     }
     
     /**
@@ -182,7 +161,7 @@ public class ProfileEntry{
      * @return The current number of extra players used by this ProfileEntry.
      */
     public Integer getExtraPlayersCount(){
-        return extraPlayersCount;
+        throw new UnsupportedAPIAccessException();
     }
     
     /**
@@ -199,24 +178,13 @@ public class ProfileEntry{
      * @return The current MOTD used by this ProfileEntry.
      */
     public boolean isInvalid(){
-        return getMotd().isEmpty() &&
-            getPlayers().isEmpty() &&
-            ((getPlayerCountText() == null || getPlayerCountText().isEmpty()) && !isHidePlayersEnabled().getOrDefault(false)) &&
-            (getFavicon() == null || getFavicon().isEmpty());
+        throw new UnsupportedAPIAccessException();
     }
     
     /**
      * Builder class to create a new {@link ProfileEntry ProfileEntry instance}.
      */
     public static class Builder{
-        
-        private List<String> motd = new ArrayList<>();
-        private List<String> players = new ArrayList<>();
-        private String playerCountText = null;
-        private String favicon = null;
-        private NullBool hidePlayersEnabled = NullBool.FALSE;
-        private NullBool extraPlayersEnabled = NullBool.FALSE;
-        private Integer extraPlayersCount = 0;
         
         public Builder(){}
         
@@ -235,16 +203,7 @@ public class ProfileEntry{
          *         When the provided list is null.
          */
         public Builder setMotd(List<String> motd){
-            if(motd == null)
-                throw new IllegalArgumentException("motd may not be null.");
-            
-            if(motd.size() > 2){
-                this.motd = motd.subList(0, 2);
-                return this;
-            }
-            
-            this.motd = motd;
-            return this;
+            throw new UnsupportedAPIAccessException();
         }
         
         /**
@@ -262,11 +221,7 @@ public class ProfileEntry{
          *         When the provided list is null.
          */
         public Builder setPlayers(List<String> players){
-            if(players == null)
-                throw new IllegalArgumentException("players may not be null.");
-            
-            this.players = players;
-            return this;
+            throw new UnsupportedAPIAccessException();
         }
         
         /**
@@ -280,8 +235,7 @@ public class ProfileEntry{
          * @return This Builder after the player count text has been set. Useful for chaining.
          */
         public Builder setPlayerCountText(String playerCountText){
-            this.playerCountText = playerCountText;
-            return this;
+            throw new UnsupportedAPIAccessException();
         }
         
         /**
@@ -301,8 +255,7 @@ public class ProfileEntry{
          * @return This Builder after the favicon has been set. Useful for chaining.
          */
         public Builder setFavicon(String favicon){
-            this.favicon = favicon;
-            return this;
+            throw new UnsupportedAPIAccessException();
         }
         
         /**
@@ -316,11 +269,7 @@ public class ProfileEntry{
          * @return This Builder after the NullBool has been set. Useful for chaining.
          */
         public Builder setHidePlayersEnabled(NullBool hidePlayersEnabled){
-            if(hidePlayersEnabled == null)
-                throw new IllegalArgumentException("hidePlayersEnabled may not be null.");
-            
-            this.hidePlayersEnabled = hidePlayersEnabled;
-            return this;
+            throw new UnsupportedAPIAccessException();
         }
         
         /**
@@ -334,11 +283,7 @@ public class ProfileEntry{
          * @return This Builder after the NullBool has been set. Useful for chaining.
          */
         public Builder setExtraPlayersEnabled(NullBool extraPlayersEnabled){
-            if(extraPlayersEnabled == null)
-                throw new IllegalArgumentException("extraPlayersEnabled may not be null.");
-            
-            this.extraPlayersEnabled = extraPlayersEnabled;
-            return this;
+            throw new UnsupportedAPIAccessException();
         }
         
         /**
@@ -351,8 +296,7 @@ public class ProfileEntry{
          * @return This Builder after the extra player count has been set. Useful for chaining.
          */
         public Builder setExtraPlayerCount(Integer extraPlayersCount){
-            this.extraPlayersCount = extraPlayersCount;
-            return this;
+            throw new UnsupportedAPIAccessException();
         }
         
         /**
@@ -361,7 +305,7 @@ public class ProfileEntry{
          * @return New {@link ProfileEntry ProfileEntry instance}.
          */
         public ProfileEntry build(){
-            return new ProfileEntry(motd, players, playerCountText, favicon, hidePlayersEnabled, extraPlayersEnabled, extraPlayersCount);
+            throw new UnsupportedAPIAccessException();
         }
     }
 }

@@ -25,17 +25,32 @@
 
 package ch.andre601.advancedserverlist.velocity.objects;
 
+import ch.andre601.advancedserverlist.api.exceptions.UnsupportedAPIAccessException;
 import ch.andre601.advancedserverlist.api.objects.GenericPlayer;
 import ch.andre601.advancedserverlist.core.objects.CachedPlayer;
-import com.velocitypowered.api.network.ProtocolVersion;
 
+/**
+ * {@link GenericPlayer GenericPlayer instance} for the Velocity proxy implementation of AdvancedServerList.
+ * <br>Unlike the other platforms does this one provide an actual value for {@link #getVersion() getVersion()} due
+ * to Velocity providing a class to convert a protocol version to a readable MC version.
+ *
+ * <p>To get an instance of this class from a GenericPlayer instance, simply cast it to a VelocityPlayer (Granted that
+ * the GenericPlayer instance actually is a VelocityPlayer instance).
+ */
 public class VelocityPlayer extends GenericPlayer{
     
     public VelocityPlayer(CachedPlayer player, int protocol){
-        this.name = player.getName();
-        this.protocol = protocol;
-        this.uuid = player.getUuid();
-        
-        this.version = ProtocolVersion.getProtocolVersion(protocol).getVersionIntroducedIn();
+        throw new UnsupportedAPIAccessException();
+    }
+    
+    /**
+     * Returns the {@link #getProtocol() protocol version} in a readable MC version format (i.e. 1.19.3).
+     *
+     * <p>This only works on Velocity and will return {@code null} for any other platform.
+     *
+     * @return The readable MC version the player uses.
+     */
+    public String getVersion(){
+        throw new UnsupportedAPIAccessException();
     }
 }

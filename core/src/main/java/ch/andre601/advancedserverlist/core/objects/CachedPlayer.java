@@ -25,6 +25,8 @@
 
 package ch.andre601.advancedserverlist.core.objects;
 
+import ch.andre601.advancedserverlist.api.exceptions.UnsupportedAPIAccessException;
+
 import java.util.UUID;
 
 /**
@@ -35,14 +37,8 @@ import java.util.UUID;
 @SuppressWarnings("FieldMayBeFinal")
 public class CachedPlayer{
     
-    private String ip;
-    private String name;
-    private UUID uuid;
-    
     public CachedPlayer(String ip, String name, UUID uuid){
-        this.ip = ip;
-        this.name = name;
-        this.uuid = uuid;
+        throw new UnsupportedAPIAccessException();
     }
     
     /**
@@ -51,7 +47,7 @@ public class CachedPlayer{
      * @return String representing the player's IP.
      */
     public String getIp(){
-        return ip;
+        throw new UnsupportedAPIAccessException();
     }
     
     /**
@@ -60,7 +56,7 @@ public class CachedPlayer{
      * @return Last used Minecraft Account name.
      */
     public String getName(){
-        return name;
+        throw new UnsupportedAPIAccessException();
     }
     
     /**
@@ -69,6 +65,6 @@ public class CachedPlayer{
      * @return UUID of the Minecraft Account.
      */
     public UUID getUuid(){
-        return uuid;
+        throw new UnsupportedAPIAccessException();
     }
 }

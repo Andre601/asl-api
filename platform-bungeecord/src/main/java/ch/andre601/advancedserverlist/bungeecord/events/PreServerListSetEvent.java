@@ -25,6 +25,7 @@
 
 package ch.andre601.advancedserverlist.bungeecord.events;
 
+import ch.andre601.advancedserverlist.api.exceptions.UnsupportedAPIAccessException;
 import ch.andre601.advancedserverlist.api.profiles.ProfileEntry;
 import ch.andre601.advancedserverlist.api.events.GenericServerListEvent;
 import net.md_5.bungee.api.plugin.Event;
@@ -35,11 +36,8 @@ import net.md_5.bungee.api.plugin.Event;
  */
 public class PreServerListSetEvent extends Event implements GenericServerListEvent{
     
-    private ProfileEntry entry;
-    private boolean cancelled = false;
-    
     public PreServerListSetEvent(ProfileEntry entry){
-        this.entry = entry;
+        throw new UnsupportedAPIAccessException();
     }
     
     /**
@@ -49,7 +47,7 @@ public class PreServerListSetEvent extends Event implements GenericServerListEve
      */
     @Override
     public ProfileEntry getEntry(){
-        return entry;
+        throw new UnsupportedAPIAccessException();
     }
     
     /**
@@ -64,10 +62,7 @@ public class PreServerListSetEvent extends Event implements GenericServerListEve
      */
     @Override
     public void setEntry(ProfileEntry entry){
-        if(entry == null)
-            throw new IllegalArgumentException("ProfileEntry may not be null.");
-        
-        this.entry = entry;
+        throw new UnsupportedAPIAccessException();
     }
     
     /**
@@ -77,7 +72,7 @@ public class PreServerListSetEvent extends Event implements GenericServerListEve
      */
     @Override
     public boolean isCancelled(){
-        return cancelled;
+        throw new UnsupportedAPIAccessException();
     }
     
     /**
@@ -88,6 +83,6 @@ public class PreServerListSetEvent extends Event implements GenericServerListEve
      */
     @Override
     public void setCancelled(boolean cancelled){
-        this.cancelled = cancelled;
+        throw new UnsupportedAPIAccessException();
     }
 }

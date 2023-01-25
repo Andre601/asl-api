@@ -25,31 +25,31 @@
 
 package ch.andre601.advancedserverlist.spigot.objects;
 
+import ch.andre601.advancedserverlist.api.exceptions.UnsupportedAPIAccessException;
 import ch.andre601.advancedserverlist.api.objects.GenericPlayer;
 import ch.andre601.advancedserverlist.core.objects.CachedPlayer;
 import org.bukkit.OfflinePlayer;
 
+/**
+ * {@link GenericPlayer GenericPlayer instance} for the SpigotMC server implementation of AdvancedServerList.
+ * <br>This class includes a {@link #getPlayer() OfflinePlayer instance} obtained from the server the plugin
+ * runs on.
+ *
+ * <p>This class is useful for cases where you want to use the OfflinePlayer. Simply cast the GenericPlayer
+ * instance to a SpigotPlayer (Granted that it actually is an instance of it to begin with).
+ */
 public class SpigotPlayer extends GenericPlayer{
     
-    private final OfflinePlayer player;
-    
     public SpigotPlayer(OfflinePlayer player, CachedPlayer cachedPlayer, int protocol){
-        this.player = player;
-        
-        this.name = player == null ? cachedPlayer.getName() : player.getName();
-        this.protocol = protocol;
-        
-        this.uuid = player == null ? cachedPlayer.getUuid() : player.getUniqueId();
-        
-        if(player == null)
-            return;
-        
-        this.playedBefore = player.hasPlayedBefore();
-        this.banned = player.isBanned();
-        this.whitelisted = player.isWhitelisted();
+        throw new UnsupportedAPIAccessException();
     }
     
+    /**
+     * Gives the OfflinePlayer embedded in this PaperPlayer instance.
+     *
+     * @return OfflinePlayer instance.
+     */
     public OfflinePlayer getPlayer(){
-        return player;
+        throw new UnsupportedAPIAccessException();
     }
 }

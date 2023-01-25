@@ -25,6 +25,7 @@
 
 package ch.andre601.advancedserverlist.paper.objects;
 
+import ch.andre601.advancedserverlist.api.exceptions.UnsupportedAPIAccessException;
 import ch.andre601.advancedserverlist.api.objects.GenericPlayer;
 import ch.andre601.advancedserverlist.core.objects.CachedPlayer;
 import org.bukkit.OfflinePlayer;
@@ -39,21 +40,8 @@ import org.bukkit.OfflinePlayer;
  */
 public class PaperPlayer extends GenericPlayer{
     
-    private final OfflinePlayer player;
-    
     public PaperPlayer(OfflinePlayer player, CachedPlayer cachedPlayer, int protocol){
-        this.player = player;
-        
-        this.name = player == null ? cachedPlayer.getName() : player.getName();
-        this.protocol = protocol;
-        this.uuid = player == null ? cachedPlayer.getUuid() : player.getUniqueId();
-        
-        if(player == null)
-            return;
-        
-        this.playedBefore = player.hasPlayedBefore();
-        this.banned = player.isBanned();
-        this.whitelisted = player.isWhitelisted();
+        throw new UnsupportedAPIAccessException();
     }
     
     /**
@@ -62,6 +50,6 @@ public class PaperPlayer extends GenericPlayer{
      * @return OfflinePlayer instance.
      */
     public OfflinePlayer getPlayer(){
-        return player;
+        throw new UnsupportedAPIAccessException();
     }
 }

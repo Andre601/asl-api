@@ -33,8 +33,6 @@ import ch.andre601.advancedserverlist.api.exceptions.UnsupportedAPIAccessExcepti
  */
 public class AdvancedServerListAPI{
     
-    private static AdvancedServerListAPI instance;
-    
     private AdvancedServerListAPI(){}
     
     /**
@@ -44,10 +42,7 @@ public class AdvancedServerListAPI{
      * @return Instance of this API.
      */
     public static AdvancedServerListAPI get(){
-        if(instance != null)
-            return instance;
-        
-        return (instance = new AdvancedServerListAPI());
+        throw new UnsupportedAPIAccessException();
     }
     
     /**

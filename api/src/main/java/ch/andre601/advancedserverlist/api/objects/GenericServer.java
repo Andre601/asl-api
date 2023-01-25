@@ -25,20 +25,16 @@
 
 package ch.andre601.advancedserverlist.api.objects;
 
+import ch.andre601.advancedserverlist.api.exceptions.UnsupportedAPIAccessException;
+
 /**
  * Simple class used to wrap around some generic server data such as online player count, amount of total players that
  * can join and the host (IP/Domain) that got pinged by the player.
  */
 public class GenericServer{
     
-    private final int playersOnline;
-    private final int playersMax;
-    private final String host;
-    
     public GenericServer(int playersOnline, int playersMax, String host){
-        this.playersOnline = playersOnline;
-        this.playersMax = playersMax;
-        this.host = host;
+        throw new UnsupportedAPIAccessException();
     }
     
     /**
@@ -47,7 +43,7 @@ public class GenericServer{
      * @return Number of players online on the server.
      */
     public int getPlayersOnline(){
-        return playersOnline;
+        throw new UnsupportedAPIAccessException();
     }
     
     /**
@@ -56,7 +52,7 @@ public class GenericServer{
      * @return Number of total players that can join the server.
      */
     public int getPlayersMax(){
-        return playersMax;
+        throw new UnsupportedAPIAccessException();
     }
     
     /**
@@ -65,6 +61,6 @@ public class GenericServer{
      * @return Possibly-null String containing the IP/Domain that got pinged by the player.
      */
     public String getHost(){
-        return host;
+        throw new UnsupportedAPIAccessException();
     }
 }
