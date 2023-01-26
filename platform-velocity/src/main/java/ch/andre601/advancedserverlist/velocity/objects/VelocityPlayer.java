@@ -25,9 +25,7 @@
 
 package ch.andre601.advancedserverlist.velocity.objects;
 
-import ch.andre601.advancedserverlist.api.exceptions.UnsupportedAPIAccessException;
 import ch.andre601.advancedserverlist.api.objects.GenericPlayer;
-import ch.andre601.advancedserverlist.core.objects.CachedPlayer;
 
 /**
  * {@link GenericPlayer GenericPlayer instance} for the Velocity proxy implementation of AdvancedServerList.
@@ -37,11 +35,7 @@ import ch.andre601.advancedserverlist.core.objects.CachedPlayer;
  * <p>To get an instance of this class from a GenericPlayer instance, simply cast it to a VelocityPlayer (Granted that
  * the GenericPlayer instance actually is a VelocityPlayer instance).
  */
-public class VelocityPlayer extends GenericPlayer{
-    
-    public VelocityPlayer(CachedPlayer player, int protocol){
-        throw new UnsupportedAPIAccessException();
-    }
+public interface VelocityPlayer extends GenericPlayer{
     
     /**
      * Returns the {@link #getProtocol() protocol version} in a readable MC version format (i.e. 1.19.3).
@@ -50,7 +44,5 @@ public class VelocityPlayer extends GenericPlayer{
      *
      * @return The readable MC version the player uses.
      */
-    public String getVersion(){
-        throw new UnsupportedAPIAccessException();
-    }
+    String getVersion();
 }

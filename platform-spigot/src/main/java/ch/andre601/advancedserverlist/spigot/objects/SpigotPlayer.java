@@ -25,9 +25,7 @@
 
 package ch.andre601.advancedserverlist.spigot.objects;
 
-import ch.andre601.advancedserverlist.api.exceptions.UnsupportedAPIAccessException;
 import ch.andre601.advancedserverlist.api.objects.GenericPlayer;
-import ch.andre601.advancedserverlist.core.objects.CachedPlayer;
 import org.bukkit.OfflinePlayer;
 
 /**
@@ -38,18 +36,12 @@ import org.bukkit.OfflinePlayer;
  * <p>This class is useful for cases where you want to use the OfflinePlayer. Simply cast the GenericPlayer
  * instance to a SpigotPlayer (Granted that it actually is an instance of it to begin with).
  */
-public class SpigotPlayer extends GenericPlayer{
-    
-    public SpigotPlayer(OfflinePlayer player, CachedPlayer cachedPlayer, int protocol){
-        throw new UnsupportedAPIAccessException();
-    }
+public interface SpigotPlayer extends GenericPlayer{
     
     /**
      * Gives the OfflinePlayer embedded in this PaperPlayer instance.
      *
      * @return OfflinePlayer instance.
      */
-    public OfflinePlayer getPlayer(){
-        throw new UnsupportedAPIAccessException();
-    }
+    OfflinePlayer getPlayer();
 }

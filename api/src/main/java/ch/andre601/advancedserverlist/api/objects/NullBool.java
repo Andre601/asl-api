@@ -25,8 +25,6 @@
 
 package ch.andre601.advancedserverlist.api.objects;
 
-import ch.andre601.advancedserverlist.api.exceptions.UnsupportedAPIAccessException;
-
 /**
  * A simple class to allowing to have a nullable boolean without fear of encountering a NullPointerException should
  * the Boolean instance be null.
@@ -59,7 +57,7 @@ public class NullBool{
      *        The {@link Boolean Boolean} value to set. Can be {@code null}
      */
     public NullBool(Boolean value){
-        throw new UnsupportedAPIAccessException();
+        this.value = value;
     }
     
     /**
@@ -68,7 +66,7 @@ public class NullBool{
      * @return {@code true} if the value of this NullBool is {@code null}, otherwise false.
      */
     public boolean isNull(){
-        throw new UnsupportedAPIAccessException();
+        return value == null;
     }
     
     /**
@@ -80,6 +78,6 @@ public class NullBool{
      * @return {@code true} or {@code false} depending on what Boolean value was stored and what default has been provided.
      */
     public boolean getOrDefault(boolean def){
-        throw new UnsupportedAPIAccessException();
+        return isNull() ? def : value;
     }
 }

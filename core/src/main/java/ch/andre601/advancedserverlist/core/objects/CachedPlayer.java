@@ -25,8 +25,6 @@
 
 package ch.andre601.advancedserverlist.core.objects;
 
-import ch.andre601.advancedserverlist.api.exceptions.UnsupportedAPIAccessException;
-
 import java.util.UUID;
 
 /**
@@ -35,36 +33,26 @@ import java.util.UUID;
  * <br>A CachedPlayer is also created when a player joins while AdvancedServerList is running.
  */
 @SuppressWarnings("FieldMayBeFinal")
-public class CachedPlayer{
-    
-    public CachedPlayer(String ip, String name, UUID uuid){
-        throw new UnsupportedAPIAccessException();
-    }
+public interface CachedPlayer{
     
     /**
      * The IP the player last joined with.
      * 
      * @return String representing the player's IP.
      */
-    public String getIp(){
-        throw new UnsupportedAPIAccessException();
-    }
+    String getIp();
     
     /**
      * The Minecraft Account name last used by the player.
      * 
      * @return Last used Minecraft Account name.
      */
-    public String getName(){
-        throw new UnsupportedAPIAccessException();
-    }
+    String getName();
     
     /**
      * The UUID associated with the Minecraft Account.
      * 
      * @return UUID of the Minecraft Account.
      */
-    public UUID getUuid(){
-        throw new UnsupportedAPIAccessException();
-    }
+    UUID getUuid();
 }

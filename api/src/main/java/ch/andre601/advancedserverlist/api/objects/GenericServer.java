@@ -31,36 +31,26 @@ import ch.andre601.advancedserverlist.api.exceptions.UnsupportedAPIAccessExcepti
  * Simple class used to wrap around some generic server data such as online player count, amount of total players that
  * can join and the host (IP/Domain) that got pinged by the player.
  */
-public class GenericServer{
-    
-    public GenericServer(int playersOnline, int playersMax, String host){
-        throw new UnsupportedAPIAccessException();
-    }
+public interface GenericServer{
     
     /**
      * Returns the number of players currently online on the server.
      *
      * @return Number of players online on the server.
      */
-    public int getPlayersOnline(){
-        throw new UnsupportedAPIAccessException();
-    }
+    int getPlayersOnline();
     
     /**
      * Returns the number of total players that can join the server.
      *
      * @return Number of total players that can join the server.
      */
-    public int getPlayersMax(){
-        throw new UnsupportedAPIAccessException();
-    }
+    int getPlayersMax();
     
     /**
      * Returns the IP/Domain that got pinged by the player.
      *
      * @return Possibly-null String containing the IP/Domain that got pinged by the player.
      */
-    public String getHost(){
-        throw new UnsupportedAPIAccessException();
-    }
+    String getHost();
 }
