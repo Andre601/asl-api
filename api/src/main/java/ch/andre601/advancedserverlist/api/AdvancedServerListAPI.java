@@ -25,13 +25,21 @@
 
 package ch.andre601.advancedserverlist.api;
 
-import ch.andre601.advancedserverlist.api.exceptions.UnsupportedAPIAccessException;
+import ch.andre601.advancedserverlist.api.exceptions.InvalidPlaceholderProviderException;
+
+import java.util.HashMap;
+import java.util.Locale;
+import java.util.Map;
 
 /**
  * Core class of the API for AdvancedServerList.
  * <br>Use {@link #get() get()} to retrieve the instance currently used.
  */
 public class AdvancedServerListAPI{
+    
+    private static AdvancedServerListAPI instance = null;
+    
+    private final Map<String, PlaceholderProvider> placeholderProviders = new HashMap<>();
     
     private AdvancedServerListAPI(){}
     
@@ -42,7 +50,10 @@ public class AdvancedServerListAPI{
      * @return Instance of this API.
      */
     public static AdvancedServerListAPI get(){
-        throw new UnsupportedAPIAccessException();
+        if(instance != null)
+            return instance;
+        
+        return (instance = new AdvancedServerListAPI());
     }
     
     /**
@@ -64,7 +75,17 @@ public class AdvancedServerListAPI{
      *         the identifier contains spaces or another provider with the same identifier is already loaded.
      */
     public void addPlaceholderProvider(PlaceholderProvider placeholderProvider){
-        throw new UnsupportedAPIAccessException();
+        if(placeholderProvider.getIdentifier() == null || placeholderProvider.getIdentifier().trim().isEmpty())
+            throw new InvalidPlaceholderProviderException("Identifier may not be null or empty.");
+        
+        String identifier = placeholderProvider.getIdentifier().trim().toLowerCase(Locale.ROOT);
+        if(identifier.contains(" "))
+            throw new InvalidPlaceholderProviderException("Identifier may not contain spaces");
+        
+        if(placeholderProviders.containsKey(identifier))
+            throw new InvalidPlaceholderProviderException("A PlaceholderProvider with identifier '" + identifier + "'  is already registered.");
+        
+        placeholderProviders.put(identifier, placeholderProvider);
     }
     
     /**
@@ -77,6 +98,6 @@ public class AdvancedServerListAPI{
      * @return Possibly-null {@link PlaceholderProvider PlaceholderProvider instance}.
      */
     public PlaceholderProvider retrievePlaceholderProvider(String identifier){
-        throw new UnsupportedAPIAccessException();
+        return placeholderProviders.get(identifier.toLowerCase(Locale.ROOT));
     }
 }

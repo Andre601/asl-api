@@ -26,17 +26,19 @@
 package ch.andre601.advancedserverlist.velocity.events;
 
 import ch.andre601.advancedserverlist.api.events.GenericServerListEvent;
-import ch.andre601.advancedserverlist.api.exceptions.UnsupportedAPIAccessException;
 import ch.andre601.advancedserverlist.api.profiles.ProfileEntry;
 
 /**
  * Called <b>before</b> AdvancedServerList modifies the server list.
  * <br>The provided {@link #getEntry() ProfileEntry} will be the one used for the server list.
  */
-public class PreServerListSetEvent implements GenericServerListEvent{
+public abstract class PreServerListSetEvent implements GenericServerListEvent{
+    
+    private ProfileEntry entry;
+    private boolean cancelled;
     
     public PreServerListSetEvent(ProfileEntry entry){
-        throw new UnsupportedAPIAccessException();
+        this.entry = entry;
     }
     
     /**
@@ -46,7 +48,7 @@ public class PreServerListSetEvent implements GenericServerListEvent{
      */
     @Override
     public ProfileEntry getEntry(){
-        throw new UnsupportedAPIAccessException();
+        return entry;
     }
     
     /**
@@ -61,7 +63,7 @@ public class PreServerListSetEvent implements GenericServerListEvent{
      */
     @Override
     public void setEntry(ProfileEntry entry){
-        throw new UnsupportedAPIAccessException();
+        this.entry = ProfileEntry.copyOf(entry);
     }
     
     /**
@@ -71,7 +73,7 @@ public class PreServerListSetEvent implements GenericServerListEvent{
      */
     @Override
     public boolean isCancelled(){
-        throw new UnsupportedAPIAccessException();
+        return cancelled;
     }
     
     /**
@@ -82,6 +84,6 @@ public class PreServerListSetEvent implements GenericServerListEvent{
      */
     @Override
     public void setCancelled(boolean cancelled){
-        throw new UnsupportedAPIAccessException();
+        this.cancelled = cancelled;
     }
 }

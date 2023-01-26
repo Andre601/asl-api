@@ -25,8 +25,6 @@
 
 package ch.andre601.advancedserverlist.api.objects;
 
-import ch.andre601.advancedserverlist.api.exceptions.UnsupportedAPIAccessException;
-
 /**
  * Simple class used to wrap around some generic server data such as online player count, amount of total players that
  * can join and the host (IP/Domain) that got pinged by the player.

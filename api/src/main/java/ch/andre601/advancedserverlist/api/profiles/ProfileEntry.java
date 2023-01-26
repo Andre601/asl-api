@@ -25,10 +25,8 @@
 
 package ch.andre601.advancedserverlist.api.profiles;
 
-import ch.andre601.advancedserverlist.api.exceptions.UnsupportedAPIAccessException;
 import ch.andre601.advancedserverlist.api.objects.NullBool;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -37,10 +35,18 @@ import java.util.List;
  * <br>The content may come from either the "profiles" list, the options in the file itself (global options) or a
  * mix of both.
  *
- * <p>This class is immutable. Use {@link #copy() copy()} to get a {@link Builder Builder instance} with the values
+ * <p>This class is immutable. Use {@link #getBuilder() copy()} to get a {@link Builder Builder instance} with the values
  * of this class added.
  */
 public class ProfileEntry{
+    
+    private final List<String> motd;
+    private final List<String> players;
+    private final String playerCountText;
+    private final String favicon;
+    private final NullBool hidePlayersEnabled;
+    private final NullBool extraPlayersEnabled;
+    private final Integer extraPlayersCount;
     
     /**
      * Creates a new instance of a ProfileEntry with the given values.
@@ -62,7 +68,13 @@ public class ProfileEntry{
      */
     public ProfileEntry(List<String> motd, List<String> players, String playerCountText, String favicon,
                         NullBool hidePlayersEnabled, NullBool extraPlayersEnabled, Integer extraPlayersCount){
-        throw new UnsupportedAPIAccessException();
+        this.motd = motd;
+        this.players = players;
+        this.playerCountText = playerCountText;
+        this.favicon = favicon;
+        this.hidePlayersEnabled = hidePlayersEnabled;
+        this.extraPlayersEnabled = extraPlayersEnabled;
+        this.extraPlayersCount = extraPlayersCount;
     }
     
     /**
@@ -72,15 +84,48 @@ public class ProfileEntry{
      *     <li>{@link #getPlayers() players}: Empty List</li>
      *     <li>{@link #getPlayerCountText() playerCountText}: Empty String</li>
      *     <li>{@link #getFavicon() favicon}: Empty String</li>
-     *     <li>{@link #isHidePlayersEnabled() hidePlayersEnabled}: {@link NullBool#NULL NullBool.NULL}</li>
-     *     <li>{@link #isExtraPlayersEnabled() extraPlayersEnabled}: {@link NullBool#NULL NullBool.NULL}</li>
+     *     <li>{@link #isHidePlayersEnabled() hidePlayersEnabled}: {@link NullBool#NOT_SET NullBool.NOT_SET}</li>
+     *     <li>{@link #isExtraPlayersEnabled() extraPlayersEnabled}: {@link NullBool#NOT_SET NullBool.NOT_SET}</li>
      *     <li>{@link #getExtraPlayersCount() extraPlayersCount}: 0</li>
      * </ul>
      *
      * @return New ProfileEntry instance with empty/null values defined.
      */
     public static ProfileEntry empty(){
-        throw new UnsupportedAPIAccessException();
+        return new ProfileEntry(Collections.emptyList(), Collections.emptyList(), "", "",
+            NullBool.NOT_SET, NullBool.NOT_SET, null);
+    }
+    
+    /**
+     * Creates a copy of the provided ProfileEntry instance.
+     * <br>This can be useful if you would like to keep the original ProfileEntry while still altering some options in
+     * another version.
+     * 
+     * <p>This method is the quivalent of calling the {@link #getBuilder() copy method} on your instance and building it.
+     * <br>Example:
+     * <pre>{@code 
+     * ProfileEntry entry = // Get your ProfileEntry
+     * 
+     * // Both are the same
+     * ProfileEntry example1 = ProfileEntry.copyOf(entry);
+     * ProfileEntry example2 = entry.getBuilder().build();
+     * }</pre>
+     * 
+     * @param  entry
+     *         The Entry to get a copy of.
+     * 
+     * @return A copy of the provided ProfileEntry instance.
+     * 
+     * @throws IllegalArgumentException
+     *         If the provided entry is null.
+     * 
+     * @see #getBuilder() ProfileEntry#getBuilder()
+     */
+    public static ProfileEntry copyOf(ProfileEntry entry){
+        if(entry == null)
+            throw new IllegalArgumentException("Entry may not be null.");
+        
+        return entry.getBuilder().build();
     }
     
     /**
@@ -89,8 +134,14 @@ public class ProfileEntry{
      *
      * @return A new {@link Builder Builder instance} with the values of this ProfileEntry set.
      */
-    public Builder copy(){
-        throw new UnsupportedAPIAccessException();
+    public Builder getBuilder(){
+        return new Builder()
+            .setMotd(getMotd())
+            .setPlayers(getPlayers())
+            .setPlayerCountText(getPlayerCountText())
+            .setHidePlayersEnabled(isHidePlayersEnabled())
+            .setExtraPlayersEnabled(isExtraPlayersEnabled())
+            .setExtraPlayerCount(extraPlayersCount);
     }
     
     /**
@@ -99,7 +150,7 @@ public class ProfileEntry{
      * @return The current MOTD used by this ProfileEntry.
      */
     public List<String> getMotd(){
-        throw new UnsupportedAPIAccessException();
+        return motd;
     }
     
     /**
@@ -108,7 +159,7 @@ public class ProfileEntry{
      * @return The current list of players used by this ProfileEntry.
      */
     public List<String> getPlayers(){
-        throw new UnsupportedAPIAccessException();
+        return players;
     }
     
     /**
@@ -117,7 +168,7 @@ public class ProfileEntry{
      * @return The current player count text used by this ProfileEntry.
      */
     public String getPlayerCountText(){
-        throw new UnsupportedAPIAccessException();
+        return playerCountText;
     }
     
     /**
@@ -132,7 +183,7 @@ public class ProfileEntry{
      * @return The current favicon used by this ProfileEntry.
      */
     public String getFavicon(){
-        throw new UnsupportedAPIAccessException();
+        return favicon;
     }
     
     /**
@@ -142,7 +193,7 @@ public class ProfileEntry{
      * @return Whether the player count should be hidden or not.
      */
     public NullBool isHidePlayersEnabled(){
-        throw new UnsupportedAPIAccessException();
+        return hidePlayersEnabled;
     }
     
     /**
@@ -152,7 +203,7 @@ public class ProfileEntry{
      * @return Whether the extra players feature should be used or not.
      */
     public NullBool isExtraPlayersEnabled(){
-        throw new UnsupportedAPIAccessException();
+        return extraPlayersEnabled;
     }
     
     /**
@@ -161,7 +212,7 @@ public class ProfileEntry{
      * @return The current number of extra players used by this ProfileEntry.
      */
     public Integer getExtraPlayersCount(){
-        throw new UnsupportedAPIAccessException();
+        return extraPlayersCount;
     }
     
     /**
@@ -178,13 +229,24 @@ public class ProfileEntry{
      * @return The current MOTD used by this ProfileEntry.
      */
     public boolean isInvalid(){
-        throw new UnsupportedAPIAccessException();
+        return getMotd().isEmpty() &&
+            getPlayers().isEmpty() &&
+            ((getPlayerCountText() == null || getPlayerCountText().isEmpty()) && !isHidePlayersEnabled().getOrDefault(false)) &&
+            (getFavicon() == null || getFavicon().isEmpty());
     }
     
     /**
      * Builder class to create a new {@link ProfileEntry ProfileEntry instance}.
      */
     public static class Builder{
+    
+        private List<String> motd;
+        private List<String> players;
+        private String playerCountText;
+        private String favicon;
+        private NullBool hidePlayersEnabled;
+        private NullBool extraPlayersEnabled;
+        private Integer extraPlayersCount;
         
         public Builder(){}
         
@@ -203,7 +265,16 @@ public class ProfileEntry{
          *         When the provided list is null.
          */
         public Builder setMotd(List<String> motd){
-            throw new UnsupportedAPIAccessException();
+            if(motd == null)
+                throw new IllegalArgumentException("Motd may not be null");
+            
+            if(motd.size() > 2){
+                this.motd = motd.subList(0, 2);
+                return this;
+            }
+            
+            this.motd = motd;
+            return this;
         }
         
         /**
@@ -221,7 +292,11 @@ public class ProfileEntry{
          *         When the provided list is null.
          */
         public Builder setPlayers(List<String> players){
-            throw new UnsupportedAPIAccessException();
+            if(players == null)
+                throw new IllegalArgumentException("Players may not be null");
+            
+            this.players = players;
+            return this;
         }
         
         /**
@@ -235,7 +310,8 @@ public class ProfileEntry{
          * @return This Builder after the player count text has been set. Useful for chaining.
          */
         public Builder setPlayerCountText(String playerCountText){
-            throw new UnsupportedAPIAccessException();
+            this.playerCountText = playerCountText;
+            return this;
         }
         
         /**
@@ -255,13 +331,14 @@ public class ProfileEntry{
          * @return This Builder after the favicon has been set. Useful for chaining.
          */
         public Builder setFavicon(String favicon){
-            throw new UnsupportedAPIAccessException();
+            this.favicon = favicon;
+            return this;
         }
         
         /**
          * Sets whether the player count should be hidden or not.
          *
-         * <p>Set to {@link NullBool#NULL NullBool.NULL} to not set this.
+         * <p>Set to {@link NullBool#NOT_SET NullBool.NOT_SET} to not set this.
          *
          * @param  hidePlayersEnabled
          *         Whether the player count should be hidden or not.
@@ -269,13 +346,14 @@ public class ProfileEntry{
          * @return This Builder after the NullBool has been set. Useful for chaining.
          */
         public Builder setHidePlayersEnabled(NullBool hidePlayersEnabled){
-            throw new UnsupportedAPIAccessException();
+            this.hidePlayersEnabled = hidePlayersEnabled;
+            return this;
         }
         
         /**
          * Sets whether the extra players feature should be enabled.
          *
-         * <p>Set to {@link NullBool#NULL NullBool.NULL} to not set this.
+         * <p>Set to {@link NullBool#NOT_SET NullBool.NOT_SET} to not set this.
          *
          * @param  extraPlayersEnabled
          *         Whether the extra players feature should be enabled or not.
@@ -283,7 +361,8 @@ public class ProfileEntry{
          * @return This Builder after the NullBool has been set. Useful for chaining.
          */
         public Builder setExtraPlayersEnabled(NullBool extraPlayersEnabled){
-            throw new UnsupportedAPIAccessException();
+            this.extraPlayersEnabled = extraPlayersEnabled;
+            return this;
         }
         
         /**
@@ -296,7 +375,8 @@ public class ProfileEntry{
          * @return This Builder after the extra player count has been set. Useful for chaining.
          */
         public Builder setExtraPlayerCount(Integer extraPlayersCount){
-            throw new UnsupportedAPIAccessException();
+            this.extraPlayersCount = extraPlayersCount;
+            return this;
         }
         
         /**
@@ -305,7 +385,7 @@ public class ProfileEntry{
          * @return New {@link ProfileEntry ProfileEntry instance}.
          */
         public ProfileEntry build(){
-            throw new UnsupportedAPIAccessException();
+            return new ProfileEntry(motd, players, playerCountText, favicon, hidePlayersEnabled, extraPlayersEnabled, extraPlayersCount);
         }
     }
 }

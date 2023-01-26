@@ -25,7 +25,6 @@
 
 package ch.andre601.advancedserverlist.bungeecord.events;
 
-import ch.andre601.advancedserverlist.api.exceptions.UnsupportedAPIAccessException;
 import ch.andre601.advancedserverlist.api.profiles.ProfileEntry;
 import ch.andre601.advancedserverlist.api.events.GenericServerListEvent;
 import net.md_5.bungee.api.plugin.Event;
@@ -34,10 +33,13 @@ import net.md_5.bungee.api.plugin.Event;
  * Called <b>before</b> AdvancedServerList modifies the server list.
  * <br>The provided {@link #getEntry() ProfileEntry} will be the one used for the server list.
  */
-public class PreServerListSetEvent extends Event implements GenericServerListEvent{
+public abstract class PreServerListSetEvent extends Event implements GenericServerListEvent{
+    
+    private ProfileEntry entry;
+    private boolean cancelled;
     
     public PreServerListSetEvent(ProfileEntry entry){
-        throw new UnsupportedAPIAccessException();
+        this.entry = entry;
     }
     
     /**
@@ -47,7 +49,7 @@ public class PreServerListSetEvent extends Event implements GenericServerListEve
      */
     @Override
     public ProfileEntry getEntry(){
-        throw new UnsupportedAPIAccessException();
+        return entry;
     }
     
     /**
@@ -62,7 +64,7 @@ public class PreServerListSetEvent extends Event implements GenericServerListEve
      */
     @Override
     public void setEntry(ProfileEntry entry){
-        throw new UnsupportedAPIAccessException();
+        this.entry = ProfileEntry.copyOf(entry);
     }
     
     /**
@@ -72,7 +74,7 @@ public class PreServerListSetEvent extends Event implements GenericServerListEve
      */
     @Override
     public boolean isCancelled(){
-        throw new UnsupportedAPIAccessException();
+        return cancelled;
     }
     
     /**
@@ -83,6 +85,6 @@ public class PreServerListSetEvent extends Event implements GenericServerListEve
      */
     @Override
     public void setCancelled(boolean cancelled){
-        throw new UnsupportedAPIAccessException();
+        this.cancelled = cancelled;
     }
 }
