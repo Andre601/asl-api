@@ -12,6 +12,13 @@ public enum NullBool{
         this.bool = bool;
     }
     
+    public static NullBool resolve(Boolean bool){
+        if(bool == null)
+            return NOT_SET;
+        
+        return bool ? TRUE : FALSE;
+    }
+    
     public boolean isNotSet(){
         return this == NOT_SET;
     }
