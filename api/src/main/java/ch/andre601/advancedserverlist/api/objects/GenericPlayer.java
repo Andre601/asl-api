@@ -72,34 +72,4 @@ public interface GenericPlayer{
      * @return UUID of the player.
      */
     UUID getUUID();
-    
-    /**
-     * Returns whether this player has played on the Server before.
-     *
-     * <p>The returned boolean is <b>always</b> false on BungeeCord and Velocity due to a lack of any offline player data
-     * storage.
-     *
-     * @return Boolean indicating whether this player has played on this Server before.
-     */
-    boolean hasPlayedBefore();
-    
-    /**
-     * Returns whether this player is banned on the server.
-     *
-     * <p>The returned boolean is <b>always</b> false on BungeeCord and Velocity due to a lack of any offline player data
-     * storage.
-     *
-     * @return Boolean indicating whether this player was banned from the server.
-     */
-    boolean isBanned();
-    
-    /**
-     * Returns whether this player is whitelisted on the server.
-     *
-     * <p>The returned boolean is <b>always</b> false on BungeeCord and Velocity due to a lack of any offline player data
-     * storage.
-     *
-     * @return Boolean indicating whether this player was banned from the server.
-     */
-    boolean isWhitelisted();
 }

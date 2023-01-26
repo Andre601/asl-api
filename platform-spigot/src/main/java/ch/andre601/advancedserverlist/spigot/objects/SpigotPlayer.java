@@ -44,4 +44,31 @@ public interface SpigotPlayer extends GenericPlayer{
      * @return OfflinePlayer instance.
      */
     OfflinePlayer getPlayer();
+    
+    /**
+     * Returns whether this player has played on the Server before.
+     *
+     * <p>The returned boolean may be inaccurate if AdvancedServerList was unable to obtain a valid OfflinePlayer instance.
+     *
+     * @return Boolean indicating whether this player has played on this Server before.
+     */
+    boolean hasPlayedBefore();
+    
+    /**
+     * Returns whether this player is banned on the server.
+     *
+     * <p>The returned boolean may be inaccurate if AdvancedServerList was unable to obtain a valid OfflinePlayer instance.
+     *
+     * @return Boolean indicating whether this player was banned from the server.
+     */
+    boolean isBanned();
+    
+    /**
+     * Returns whether this player is whitelisted on the server.
+     *
+     * <p>The returned boolean may be inaccurate if AdvancedServerList was unable to obtain a valid OfflinePlayer instance.
+     *
+     * @return Boolean indicating whether this player was banned from the server.
+     */
+    boolean isWhitelisted();
 }
