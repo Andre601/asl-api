@@ -25,6 +25,7 @@
 
 package ch.andre601.advancedserverlist.api.profiles;
 
+import ch.andre601.advancedserverlist.api.internal.CheckUtil;
 import ch.andre601.advancedserverlist.api.objects.NullBool;
 
 import java.util.ArrayList;
@@ -69,6 +70,11 @@ public class ProfileEntry{
      */
     public ProfileEntry(List<String> motd, List<String> players, String playerCountText, String favicon,
                         NullBool hidePlayersEnabled, NullBool extraPlayersEnabled, Integer extraPlayersCount){
+        CheckUtil.isNull("Motd", motd);
+        CheckUtil.isNull("Players", players);
+        CheckUtil.isNull("HidePlayersEnabled", hidePlayersEnabled);
+        CheckUtil.isNull("ExtraPlayersEnabled", extraPlayersEnabled);
+        
         this.motd = motd;
         this.players = players;
         this.playerCountText = playerCountText;
@@ -123,8 +129,7 @@ public class ProfileEntry{
      * @see #getBuilder() ProfileEntry#getBuilder()
      */
     public static ProfileEntry copyOf(ProfileEntry entry){
-        if(entry == null)
-            throw new IllegalArgumentException("Entry may not be null.");
+        CheckUtil.isNull("Entry", entry);
         
         return entry.getBuilder().build();
     }
@@ -140,9 +145,10 @@ public class ProfileEntry{
             .setMotd(getMotd())
             .setPlayers(getPlayers())
             .setPlayerCountText(getPlayerCountText())
+            .setFavicon(getFavicon())
             .setHidePlayersEnabled(isHidePlayersEnabled())
             .setExtraPlayersEnabled(isExtraPlayersEnabled())
-            .setExtraPlayerCount(extraPlayersCount);
+            .setExtraPlayerCount(getExtraPlayersCount());
     }
     
     /**
@@ -243,8 +249,8 @@ public class ProfileEntry{
     
         private List<String> motd = new ArrayList<>();
         private List<String> players = new ArrayList<>();
-        private String playerCountText = null;
-        private String favicon = null;
+        private String playerCountText = "";
+        private String favicon = "";
         private NullBool hidePlayersEnabled = NullBool.NOT_SET;
         private NullBool extraPlayersEnabled = NullBool.NOT_SET;
         private Integer extraPlayersCount = 0;
@@ -255,19 +261,18 @@ public class ProfileEntry{
          * Sets a new MOTD to use.
          *
          * <p>Set to an empty list to not change the MOTD.
-         * <br>The provided list cannot be null. Lists with more than 2 entries will be cut down.
-         *
+         * <br>Only the first two entries of the list will be considered and any additional ones discarded.
+         * 
+         * <p>An {@link java.lang.IllegalArgumentException IllegalArgumentException} may be thrown by the
+         * {@link CheckUtil CheckUtil} should the provided motd list be null.
+         * 
          * @param  motd
          *         The MOTD to use.
          *
          * @return This Builder after the motd has been set. Useful for chaining.
-         *
-         * @throws IllegalArgumentException
-         *         When the provided list is null.
          */
         public Builder setMotd(List<String> motd){
-            if(motd == null)
-                throw new IllegalArgumentException("Motd may not be null");
+            CheckUtil.isNull("Motd", motd);
             
             if(motd.size() > 2){
                 this.motd = motd.subList(0, 2);
@@ -282,19 +287,17 @@ public class ProfileEntry{
          * Sets the players (lines) to use for the hover.
          *
          * <p>Set to an empty list to not change the hover text.
-         * <br>The provided list cannot be null.
+         *
+         * <p>An {@link java.lang.IllegalArgumentException IllegalArgumentException} may be thrown by the
+         * {@link CheckUtil CheckUtil} should the provided players list be null.
          *
          * @param  players
          *         The lines to set for the hover.
          *
          * @return This Builder after the players have been set. Useful for chaining.
-         *
-         * @throws IllegalArgumentException
-         *         When the provided list is null.
          */
         public Builder setPlayers(List<String> players){
-            if(players == null)
-                throw new IllegalArgumentException("Players may not be null");
+            CheckUtil.isNull("Players", players);
             
             this.players = players;
             return this;
@@ -303,7 +306,7 @@ public class ProfileEntry{
         /**
          * Sets the text to override the player count with.
          *
-         * <p>Set to {@code null} to not change the player count text.
+         * <p>Set to an empty String or {@code null} to not alter the Player count text.
          *
          * @param  playerCountText
          *         The text to show in the player count.
@@ -324,7 +327,7 @@ public class ProfileEntry{
          *     <li>{@code ${player uuid}} to display the avatar of the player.</li>
          * </ul>
          *
-         * <p>Set to {@code null} to not change the favicon.
+         * <p>Set to an empty String or {@code null} to not alter the Favicon.
          *
          * @param  favicon
          *         The favicon to use.
@@ -340,6 +343,9 @@ public class ProfileEntry{
          * Sets whether the player count should be hidden or not.
          *
          * <p>Set to {@link NullBool#NOT_SET NullBool.NOT_SET} to not set this.
+         * 
+         * <p>An {@link java.lang.IllegalArgumentException IllegalArgumentException} may be thrown by the
+         * {@link CheckUtil CheckUtil} should hidePlayersEnabled be null.
          *
          * @param  hidePlayersEnabled
          *         Whether the player count should be hidden or not.
@@ -347,6 +353,8 @@ public class ProfileEntry{
          * @return This Builder after the NullBool has been set. Useful for chaining.
          */
         public Builder setHidePlayersEnabled(NullBool hidePlayersEnabled){
+            CheckUtil.isNull("HidePlayersEnabled", hidePlayersEnabled);
+            
             this.hidePlayersEnabled = hidePlayersEnabled;
             return this;
         }
@@ -356,12 +364,17 @@ public class ProfileEntry{
          *
          * <p>Set to {@link NullBool#NOT_SET NullBool.NOT_SET} to not set this.
          *
+         * <p>An {@link java.lang.IllegalArgumentException IllegalArgumentException} may be thrown by the
+         * {@link CheckUtil CheckUtil} should extraPlayersEnabled be null.
+         *
          * @param  extraPlayersEnabled
          *         Whether the extra players feature should be enabled or not.
          *
          * @return This Builder after the NullBool has been set. Useful for chaining.
          */
         public Builder setExtraPlayersEnabled(NullBool extraPlayersEnabled){
+            CheckUtil.isNull("ExtraPlayersEnabled", extraPlayersEnabled);
+            
             this.extraPlayersEnabled = extraPlayersEnabled;
             return this;
         }
@@ -369,6 +382,8 @@ public class ProfileEntry{
         /**
          * Sets the number of players to add to the online players to use as the new max players.
          * <br>This option has no effect when {@link #isExtraPlayersEnabled() isExtraPlayersEnabled} is set to {@code false}.
+         * 
+         * <p>Set this to {@code null} to not alter the max player count. Alternatively {@link #setExtraPlayersEnabled(NullBool) disable extra Players}.
          *
          * @param  extraPlayersCount
          *         The number of extra players to add.
