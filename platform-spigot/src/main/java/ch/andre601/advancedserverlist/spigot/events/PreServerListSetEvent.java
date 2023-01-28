@@ -44,6 +44,7 @@ public abstract class PreServerListSetEvent extends Event implements GenericServ
     private boolean cancelled;
     
     public PreServerListSetEvent(ProfileEntry entry){
+        super(true);
         this.entry = entry;
     }
     
