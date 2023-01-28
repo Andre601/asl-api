@@ -27,6 +27,7 @@ package ch.andre601.advancedserverlist.api.profiles;
 
 import ch.andre601.advancedserverlist.api.objects.NullBool;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -240,13 +241,13 @@ public class ProfileEntry{
      */
     public static class Builder{
     
-        private List<String> motd;
-        private List<String> players;
-        private String playerCountText;
-        private String favicon;
-        private NullBool hidePlayersEnabled;
-        private NullBool extraPlayersEnabled;
-        private Integer extraPlayersCount;
+        private List<String> motd = new ArrayList<>();
+        private List<String> players = new ArrayList<>();
+        private String playerCountText = null;
+        private String favicon = null;
+        private NullBool hidePlayersEnabled = NullBool.NOT_SET;
+        private NullBool extraPlayersEnabled = NullBool.NOT_SET;
+        private Integer extraPlayersCount = 0;
         
         public Builder(){}
         
