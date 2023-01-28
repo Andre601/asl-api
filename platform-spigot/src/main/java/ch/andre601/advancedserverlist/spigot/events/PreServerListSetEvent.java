@@ -38,13 +38,17 @@ import org.jetbrains.annotations.NotNull;
  */
 public abstract class PreServerListSetEvent extends Event implements GenericServerListEvent, Cancellable{
     
-    private final HandlerList handlers = new HandlerList();
+    private static final HandlerList HANDLERS = new HandlerList();
     
     private ProfileEntry entry;
     private boolean cancelled;
     
     public PreServerListSetEvent(ProfileEntry entry){
         this.entry = entry;
+    }
+    
+    public static HandlerList getHandlerList(){
+        return HANDLERS;
     }
     
     /**
@@ -95,6 +99,6 @@ public abstract class PreServerListSetEvent extends Event implements GenericServ
     
     @Override
     public @NotNull HandlerList getHandlers(){
-        return handlers;
+        return HANDLERS;
     }
 }
