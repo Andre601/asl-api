@@ -93,7 +93,7 @@ public class ProfileEntry{
      *     <li>{@link #getFavicon() favicon}: Empty String</li>
      *     <li>{@link #isHidePlayersEnabled() hidePlayersEnabled}: {@link NullBool#NOT_SET NullBool.NOT_SET}</li>
      *     <li>{@link #isExtraPlayersEnabled() extraPlayersEnabled}: {@link NullBool#NOT_SET NullBool.NOT_SET}</li>
-     *     <li>{@link #getExtraPlayersCount() extraPlayersCount}: 0</li>
+     *     <li>{@link #getExtraPlayersCount() extraPlayersCount}: {@code null}</li>
      * </ul>
      *
      * @return New ProfileEntry instance with empty/null values defined.
@@ -104,34 +104,23 @@ public class ProfileEntry{
     }
     
     /**
-     * Creates a copy of the provided ProfileEntry instance.
-     * <br>This can be useful if you would like to keep the original ProfileEntry while still altering some options in
-     * another version.
+     * Creates a copy of this ProfileEntry instance.
      * 
-     * <p>This method is the quivalent of calling the {@link #getBuilder() copy method} on your instance and building it.
-     * <br>Example:
+     * <p>This is simply a convenience method to not have to call {@link #getBuilder() getBuilder()}.{@link Builder#build() build()}:
      * <pre>{@code 
-     * ProfileEntry entry = // Get your ProfileEntry
+     * ProfileEntry entry = // Get entry instance
      * 
-     * // Both are the same
-     * ProfileEntry example1 = ProfileEntry.copyOf(entry);
-     * ProfileEntry example2 = entry.getBuilder().build();
+     * // Both do the same.
+     * ProfileEntry newEntry1 = entry.getBuilder().build();
+     * ProfileEntry newEntry2 = entry.copy();
      * }</pre>
      * 
-     * @param  entry
-     *         The Entry to get a copy of.
+     * If you want to modify the ProfileEntry should {@link #getBuilder() getBuilder()} be preferred.
      * 
-     * @return A copy of the provided ProfileEntry instance.
-     * 
-     * @throws IllegalArgumentException
-     *         If the provided entry is null.
-     * 
-     * @see #getBuilder() ProfileEntry#getBuilder()
+     * @return A copy of this ProfileEntry instance.
      */
-    public static ProfileEntry copyOf(ProfileEntry entry){
-        CheckUtil.isNull("Entry", entry);
-        
-        return entry.getBuilder().build();
+    public ProfileEntry copy(){
+        return this.getBuilder().build();
     }
     
     /**

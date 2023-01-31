@@ -25,6 +25,7 @@
 
 package ch.andre601.advancedserverlist.spigot.events;
 
+import ch.andre601.advancedserverlist.api.internal.CheckUtil;
 import ch.andre601.advancedserverlist.api.profiles.ProfileEntry;
 import ch.andre601.advancedserverlist.api.events.GenericServerListEvent;
 import org.bukkit.event.Cancellable;
@@ -66,6 +67,8 @@ public abstract class PreServerListSetEvent extends Event implements GenericServ
      * Sets the new {@link ProfileEntry} to use.
      * <br>This may not be {@code null}.
      *
+     * <p>Note that a new copy of the entry will be made using {@link ProfileEntry#copy() ProfileEntry.copy()}.
+     *
      * @param entry
      *        The new {@link ProfileEntry} to use.
      *
@@ -74,7 +77,9 @@ public abstract class PreServerListSetEvent extends Event implements GenericServ
      */
     @Override
     public void setEntry(ProfileEntry entry){
-        this.entry = ProfileEntry.copyOf(entry);
+        CheckUtil.isNull("ProfileEntry", entry);
+        
+        this.entry = entry.copy();
     }
     
     /**
