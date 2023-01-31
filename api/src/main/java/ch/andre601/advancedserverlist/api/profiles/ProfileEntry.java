@@ -52,6 +52,7 @@ public class ProfileEntry{
     
     /**
      * Creates a new instance of a ProfileEntry with the given values.
+     * <br>It's recommended to use the {@link Builder Builder class} for a more convenient configuration of the settings.
      *
      * @param motd
      *        The MOTD to use.
@@ -67,6 +68,8 @@ public class ProfileEntry{
      *        Whether the extra players option should be enabled.
      * @param extraPlayersCount
      *        The number to add to the online players for the extra players.
+     * 
+     * @see Builder ProfileEntry.Builder
      */
     public ProfileEntry(List<String> motd, List<String> players, String playerCountText, String favicon,
                         NullBool hidePlayersEnabled, NullBool extraPlayersEnabled, Integer extraPlayersCount){
@@ -118,6 +121,8 @@ public class ProfileEntry{
      * If you want to modify the ProfileEntry should {@link #getBuilder() getBuilder()} be preferred.
      * 
      * @return A copy of this ProfileEntry instance.
+     * 
+     * @see #getBuilder() getBuilder()
      */
     public ProfileEntry copy(){
         return this.getBuilder().build();
