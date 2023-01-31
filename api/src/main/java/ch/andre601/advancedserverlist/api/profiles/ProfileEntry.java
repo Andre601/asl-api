@@ -247,7 +247,7 @@ public class ProfileEntry{
         private String favicon = "";
         private NullBool hidePlayersEnabled = NullBool.NOT_SET;
         private NullBool extraPlayersEnabled = NullBool.NOT_SET;
-        private Integer extraPlayersCount = 0;
+        private Integer extraPlayersCount = null;
         
         public Builder(){}
         
