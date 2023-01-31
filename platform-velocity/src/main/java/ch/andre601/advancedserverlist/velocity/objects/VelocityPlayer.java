@@ -29,8 +29,8 @@ import ch.andre601.advancedserverlist.api.objects.GenericPlayer;
 
 /**
  * {@link GenericPlayer GenericPlayer instance} for the Velocity proxy implementation of AdvancedServerList.
- * <br>Unlike the other platforms does this one provide an actual value for {@link #getVersion() getVersion()} due
- * to Velocity providing a class to convert a protocol version to a readable MC version.
+ * <br>Provides a {@link #getVersion() getVersion()} method to get the MC version used as a readable String (i.e. 1.19.3)
+ * rather than just the protocol version.
  *
  * <p>To get an instance of this class from a GenericPlayer instance, simply cast it to a VelocityPlayer (Granted that
  * the GenericPlayer instance actually is a VelocityPlayer instance).

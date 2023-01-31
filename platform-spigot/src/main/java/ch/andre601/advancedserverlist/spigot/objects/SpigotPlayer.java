@@ -31,7 +31,9 @@ import org.bukkit.OfflinePlayer;
 /**
  * {@link GenericPlayer GenericPlayer instance} for the SpigotMC server implementation of AdvancedServerList.
  * <br>This class includes a {@link #getPlayer() OfflinePlayer instance} obtained from the server the plugin
- * runs on.
+ * runs on alongside some getters to get if the player {@link #hasPlayedBefore() has played on the server before},
+ * {@link #isBanned() is banned} or {@link #isWhitelisted() is whitelisted}. These options actually require a proper
+ * OfflinePlayer instance to be present or will otherwise default to {@code false}.
  *
  * <p>This class is useful for cases where you want to use the OfflinePlayer. Simply cast the GenericPlayer
  * instance to a SpigotPlayer (Granted that it actually is an instance of it to begin with).
