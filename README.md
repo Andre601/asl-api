@@ -18,7 +18,6 @@ dependencies {
     
     // Optional platform-specific dependencies. Read more below
     implementation 'ch.andre601.asl-api:platform-bungeecord:{version}'
-    implementation 'ch.andre601.asl-api:platform-paper:{version}'
     implementation 'ch.andre601.asl-api:platform-spigot:{version}'
     implementation 'ch.andre601.asl-api:platform-velocity:{version}'
 }
@@ -49,11 +48,6 @@ dependencies {
   </dependency>
   <dependency>
       <groupId>ch.andre601.asl-api</groupId>
-      <artifactId>platform-paper</artifactId>
-      <version>{version}</version>
-  </dependency>
-  <dependency>
-      <groupId>ch.andre601.asl-api</groupId>
       <artifactId>platform-spigot</artifactId>
       <version>{version}</version>
   </dependency>
@@ -69,8 +63,7 @@ dependencies {
 
 This API repo provides additional platform-specific dependencies to use for specific versions of AdvancedServerList.
 
-The main purpose is to provide a way for you to cast the GenericPlayer to a platform-specific variant for extra options (if available).  
-These dependencies are optional and not needed unless you directly want to get platform specific data (i.e. OfflinePlayer instance on Spigot/Paper).
+These platform-specific APIs not only allow to cast the `GenericPlayer` to more platform-specific ones for more options (i.e. `SpigotPlayer` and its `getPlayer()` method), but also provide the [`PreServerListSetEvent`](#events) to hook into and use.
 
 ## Using the API
 
@@ -128,11 +121,14 @@ To make AdvancedServerList actually handle your placeholders will you need to ca
 api.addPlaceholderProvider(new MyPlaceholders());
 ```
 
-Please note, that your PlaceholderProvider instance will only be accepted when it meets the following criterias:
+Please note, that your PlaceholderProvider instance will only be accepted when it meets the following criteria:
 
-1. A non-null, non-empty identifier has been provided
-2. The identifier does not contain any spaces
-3. Another PlaceholderProvider with the same identifier isn't already added.
+1. A non-null PlaceholderProvider instance was given.
+2. A non-null, non-empty identifier has been provided
+3. The identifier does not contain any spaces
+4. Another PlaceholderProvider with the same identifier isn't already added.
+
+Failing any of the above checks will not add your class as a PlaceholderProvider to the API.
 
 ### Events
 
@@ -141,9 +137,9 @@ It allows you to modify the ProfileEntry used for the player pinging the server/
 
 ### ProfileEntry
 
-The ProfileEntry class has been moved to the API in v1.1.0 allowing you to create your own versions using the available Builder class.
+The ProfileEntry class has been moved to the API in v2, allowing you to create your own versions using the available Builder class.
 
-The ProfileEntry is what contains the necessary data from the server list profiles. This can be an entry from the "profiles" list, the settings themselves in the file or a mix of both depending on what options are present.  
+The ProfileEntry is what contains the necessary data from the server list profiles. The values can be from a `profiles` list entry, the global option in the file, or both depending on what is and is not present.  
 You can create a new entry or copy an existing one (i.e. from the [`PreServerListSetEvent`](#events)) to modify and use in the server list by setting it in the aforementioned `PreServerListSetEvent`.
 
 ## Support
