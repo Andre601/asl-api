@@ -23,26 +23,48 @@
  *
  */
 
-package ch.andre601.advancedserverlist.velocity.objects;
+package ch.andre601.advancedserverlist.api.events;
 
-import ch.andre601.advancedserverlist.api.objects.GenericPlayer;
+import ch.andre601.advancedserverlist.api.profiles.ProfileEntry;
 
 /**
- * {@link GenericPlayer GenericPlayer instance} for the Velocity proxy implementation of AdvancedServerList.
- * <br>Provides a {@link #getVersion() getVersion()} method to get the MC version used as a readable String (i.e. 1.19.3)
- * rather than just the protocol version.
- *
- * <p>To get an instance of this class from a GenericPlayer instance, simply cast it to a VelocityPlayer (Granted that
- * the GenericPlayer instance actually is a VelocityPlayer instance).
+ * Interface used for the platform-specific PreServerListSetEvent instances.
+ * <br>This allows the plugin to pull common info such as ProfileEntry or if the event has been cancelled by another
+ * plugin.
  */
-public interface VelocityPlayer extends GenericPlayer{
+public interface GenericServerListEvent{
     
     /**
-     * Returns the {@link #getProtocol() protocol version} in a readable MC version format (i.e. 1.19.3).
+     * Gets the {@link ProfileEntry} currently set.
      *
-     * <p>This only works on Velocity and will return {@code null} for any other platform.
-     *
-     * @return The readable MC version the player uses.
+     * @return The currently set {@link ProfileEntry}
      */
-    String getVersion();
+    ProfileEntry getEntry();
+    
+    /**
+     * Sets the new {@link ProfileEntry} to use.
+     * <br>This may not be {@code null}.
+     *
+     * @param entry
+     *        The new {@link ProfileEntry} to use.
+     *
+     * @throws IllegalArgumentException
+     *         When the provided ProfileEntry is null.
+     */
+    void setEntry(ProfileEntry entry);
+    
+    /**
+     * Returns whether this event has been cancelled or not.
+     *
+     * @return Whether the event has been cancelled or not.
+     */
+    boolean isCancelled();
+    
+    /**
+     * Sets the event's cancel state.
+     *
+     * @param cancelled
+     *        Boolean to set the event's cancelled state.
+     */
+    void setCancelled(boolean cancelled);
 }

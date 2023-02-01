@@ -25,7 +25,11 @@
 
 package ch.andre601.advancedserverlist.api;
 
-import ch.andre601.advancedserverlist.api.exceptions.UnsupportedAPIAccessException;
+import ch.andre601.advancedserverlist.api.internal.CheckUtil;
+
+import java.util.HashMap;
+import java.util.Locale;
+import java.util.Map;
 
 /**
  * Core class of the API for AdvancedServerList.
@@ -33,7 +37,9 @@ import ch.andre601.advancedserverlist.api.exceptions.UnsupportedAPIAccessExcepti
  */
 public class AdvancedServerListAPI{
     
-    private static AdvancedServerListAPI instance;
+    private static AdvancedServerListAPI instance = null;
+    
+    private final Map<String, PlaceholderProvider> placeholderProviders = new HashMap<>();
     
     private AdvancedServerListAPI(){}
     
@@ -53,6 +59,7 @@ public class AdvancedServerListAPI{
     /**
      * Adds the provided {@link PlaceholderProvider PlaceholderProvider} to the list, if it passes the following checks:
      * <ul>
+     *     <li>Provided PlaceholderProvider is not null.</li>
      *     <li>The identifier is not null or empty.</li>
      *     <li>The identifier does not contain any spaces.</li>
      *     <li>A PlaceholderProvider with the same identifier doesn't exist already.</li>
@@ -69,7 +76,9 @@ public class AdvancedServerListAPI{
      *         the identifier contains spaces or another provider with the same identifier is already loaded.
      */
     public void addPlaceholderProvider(PlaceholderProvider placeholderProvider){
-        throw new UnsupportedAPIAccessException();
+        String identifier = CheckUtil.checkPlaceholderProvider(placeholderProvider, placeholderProviders);
+        
+        placeholderProviders.put(identifier, placeholderProvider);
     }
     
     /**
@@ -82,6 +91,6 @@ public class AdvancedServerListAPI{
      * @return Possibly-null {@link PlaceholderProvider PlaceholderProvider instance}.
      */
     public PlaceholderProvider retrievePlaceholderProvider(String identifier){
-        throw new UnsupportedAPIAccessException();
+        return placeholderProviders.get(identifier.toLowerCase(Locale.ROOT));
     }
 }

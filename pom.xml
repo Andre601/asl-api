@@ -21,8 +21,6 @@
     <modules>
         <module>api</module>
         <module>platform-bungeecord</module>
-        <module>core</module>
-        <module>platform-paper</module>
         <module>platform-spigot</module>
         <module>platform-velocity</module>
     </modules>

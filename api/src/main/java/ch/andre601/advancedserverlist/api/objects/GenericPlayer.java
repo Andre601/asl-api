@@ -40,15 +40,7 @@ import java.util.UUID;
  * </ul>
  * Any other value is not guaranteed to be accurate or even be set.
  */
-public abstract class GenericPlayer{
-    protected String name = null;
-    protected int protocol = -1;
-    protected UUID uuid = null;
-    
-    protected String version = null;
-    protected boolean playedBefore = false;
-    protected boolean banned = false;
-    protected boolean whitelisted = false;
+public interface GenericPlayer{
     
     /**
      * Returns the name of the player.
@@ -61,9 +53,7 @@ public abstract class GenericPlayer{
      *
      * @return String representing the player's name.
      */
-    public String getName(){
-        return name;
-    }
+    String getName();
     
     /**
      * Returns the protocol ID the player is using. The protocol ID is an integer used by Minecraft to determine what
@@ -71,9 +61,7 @@ public abstract class GenericPlayer{
      *
      * @return Integer representing the protocol version of this player.
      */
-    public int getProtocol(){
-        return protocol;
-    }
+    int getProtocol();
     
     /**
      * Returns the Unique ID associated with this player.
@@ -83,54 +71,5 @@ public abstract class GenericPlayer{
      *
      * @return UUID of the player.
      */
-    public UUID getUUID(){
-        return uuid;
-    }
-    
-    /**
-     * Returns the {@link #getProtocol() protocol version} in a readable MC version format (i.e. 1.19.3).
-     *
-     * <p>This only works on Velocity and will return {@code null} for any other platform.
-     *
-     * @return The readable MC version the player uses.
-     */
-    public String getVersion(){
-        return version;
-    }
-    
-    /**
-     * Returns whether this player has played on the Server before.
-     *
-     * <p>The returned boolean is <b>always</b> false on BungeeCord and Velocity due to a lack of any offline player data
-     * storage.
-     *
-     * @return Boolean indicating whether this player has played on this Server before.
-     */
-    public boolean hasPlayedBefore() {
-        return playedBefore;
-    }
-    
-    /**
-     * Returns whether this player is banned on the server.
-     *
-     * <p>The returned boolean is <b>always</b> false on BungeeCord and Velocity due to a lack of any offline player data
-     * storage.
-     *
-     * @return Boolean indicating whether this player was banned from the server.
-     */
-    public boolean isBanned(){
-        return banned;
-    }
-    
-    /**
-     * Returns whether this player is whitelisted on the server.
-     *
-     * <p>The returned boolean is <b>always</b> false on BungeeCord and Velocity due to a lack of any offline player data
-     * storage.
-     *
-     * @return Boolean indicating whether this player was banned from the server.
-     */
-    public boolean isWhitelisted(){
-        return whitelisted;
-    }
+    UUID getUUID();
 }
