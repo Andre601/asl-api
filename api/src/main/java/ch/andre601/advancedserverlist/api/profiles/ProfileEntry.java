@@ -33,22 +33,15 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * This class represents the content found in a server list profile YAML file.
+ * This record represents the content found in a server list profile YAML file.
  * <br>The content may come from either the "profiles" list, the options in the file itself (global options) or a
  * mix of both.
  *
- * <p>This class is immutable. Use {@link #getBuilder() copy()} to get a {@link Builder Builder instance} with the values
+ * <p>This class is immutable. Use {@link #getBuilder() getBuilder()} to get a {@link Builder Builder instance} with the values
  * of this class added.
  */
-public class ProfileEntry{
-    
-    private final List<String> motd;
-    private final List<String> players;
-    private final String playerCountText;
-    private final String favicon;
-    private final NullBool hidePlayersEnabled;
-    private final NullBool extraPlayersEnabled;
-    private final Integer extraPlayersCount;
+public record ProfileEntry(List<String> motd, List<String> players, String playerCountText, String favicon,
+                           NullBool hidePlayersEnabled, NullBool extraPlayersEnabled, Integer extraPlayersCount){
     
     /**
      * Creates a new instance of a ProfileEntry with the given values.
@@ -71,32 +64,23 @@ public class ProfileEntry{
      * 
      * @see Builder ProfileEntry.Builder
      */
-    public ProfileEntry(List<String> motd, List<String> players, String playerCountText, String favicon,
-                        NullBool hidePlayersEnabled, NullBool extraPlayersEnabled, Integer extraPlayersCount){
+    public ProfileEntry{
         CheckUtil.isNull("Motd", motd);
         CheckUtil.isNull("Players", players);
         CheckUtil.isNull("HidePlayersEnabled", hidePlayersEnabled);
         CheckUtil.isNull("ExtraPlayersEnabled", extraPlayersEnabled);
-        
-        this.motd = motd;
-        this.players = players;
-        this.playerCountText = playerCountText;
-        this.favicon = favicon;
-        this.hidePlayersEnabled = hidePlayersEnabled;
-        this.extraPlayersEnabled = extraPlayersEnabled;
-        this.extraPlayersCount = extraPlayersCount;
     }
     
     /**
      * Creates an "empty" PlayerEntry with the following values set:
      * <ul>
-     *     <li>{@link #getMotd() motd}: Empty List</li>
-     *     <li>{@link #getPlayers() players}: Empty List</li>
-     *     <li>{@link #getPlayerCountText() playerCountText}: Empty String</li>
-     *     <li>{@link #getFavicon() favicon}: Empty String</li>
-     *     <li>{@link #isHidePlayersEnabled() hidePlayersEnabled}: {@link NullBool#NOT_SET NullBool.NOT_SET}</li>
-     *     <li>{@link #isExtraPlayersEnabled() extraPlayersEnabled}: {@link NullBool#NOT_SET NullBool.NOT_SET}</li>
-     *     <li>{@link #getExtraPlayersCount() extraPlayersCount}: {@code null}</li>
+     *     <li>{@link #motd() motd}: Empty List</li>
+     *     <li>{@link #players() players}: Empty List</li>
+     *     <li>{@link #playerCountText() playerCountText}: Empty String</li>
+     *     <li>{@link #favicon() favicon}: Empty String</li>
+     *     <li>{@link #hidePlayersEnabled() hidePlayersEnabled}: {@link NullBool#NOT_SET NullBool.NOT_SET}</li>
+     *     <li>{@link #extraPlayersEnabled() extraPlayersEnabled}: {@link NullBool#NOT_SET NullBool.NOT_SET}</li>
+     *     <li>{@link #extraPlayersCount() extraPlayersCount}: {@code null}</li>
      * </ul>
      *
      * @return New ProfileEntry instance with empty/null values defined.
@@ -136,13 +120,13 @@ public class ProfileEntry{
      */
     public Builder getBuilder(){
         return new Builder()
-            .setMotd(getMotd())
-            .setPlayers(getPlayers())
-            .setPlayerCountText(getPlayerCountText())
-            .setFavicon(getFavicon())
-            .setHidePlayersEnabled(isHidePlayersEnabled())
-            .setExtraPlayersEnabled(isExtraPlayersEnabled())
-            .setExtraPlayerCount(getExtraPlayersCount());
+            .setMotd(motd())
+            .setPlayers(players())
+            .setPlayerCountText(playerCountText())
+            .setFavicon(favicon())
+            .setHidePlayersEnabled(hidePlayersEnabled())
+            .setExtraPlayersEnabled(extraPlayersEnabled())
+            .setExtraPlayerCount(extraPlayersCount());
     }
     
     /**
@@ -150,7 +134,8 @@ public class ProfileEntry{
      *
      * @return The current MOTD used by this ProfileEntry.
      */
-    public List<String> getMotd(){
+    @Override
+    public List<String> motd(){
         return motd;
     }
     
@@ -159,7 +144,8 @@ public class ProfileEntry{
      *
      * @return The current list of players used by this ProfileEntry.
      */
-    public List<String> getPlayers(){
+    @Override
+    public List<String> players(){
         return players;
     }
     
@@ -168,7 +154,8 @@ public class ProfileEntry{
      *
      * @return The current player count text used by this ProfileEntry.
      */
-    public String getPlayerCountText(){
+    @Override
+    public String playerCountText(){
         return playerCountText;
     }
     
@@ -183,7 +170,8 @@ public class ProfileEntry{
      *
      * @return The current favicon used by this ProfileEntry.
      */
-    public String getFavicon(){
+    @Override
+    public String favicon(){
         return favicon;
     }
     
@@ -193,7 +181,8 @@ public class ProfileEntry{
      *
      * @return Whether the player count should be hidden or not.
      */
-    public NullBool isHidePlayersEnabled(){
+    @Override
+    public NullBool hidePlayersEnabled(){
         return hidePlayersEnabled;
     }
     
@@ -203,7 +192,8 @@ public class ProfileEntry{
      *
      * @return Whether the extra players feature should be used or not.
      */
-    public NullBool isExtraPlayersEnabled(){
+    @Override
+    public NullBool extraPlayersEnabled(){
         return extraPlayersEnabled;
     }
     
@@ -212,28 +202,121 @@ public class ProfileEntry{
      *
      * @return The current number of extra players used by this ProfileEntry.
      */
-    public Integer getExtraPlayersCount(){
+    @Override
+    public Integer extraPlayersCount(){
         return extraPlayersCount;
+    }
+    
+    /**
+     * Gets the currently set MOTD of this ProfileEntry.
+     *
+     * @return The current MOTD used by this ProfileEntry.
+     * 
+     * @deprecated Use {@link #motd() motd()} instead.
+     */
+    @Deprecated(since = "2.1.0", forRemoval = true)
+    public List<String> getMotd(){
+        return motd();
+    }
+    
+    /**
+     * Gets the currently set list of players of this ProfileEntry.
+     *
+     * @return The current list of players used by this ProfileEntry.
+     *
+     * @deprecated Use {@link #players() players()} instead.
+     */
+    @Deprecated(since = "2.1.0", forRemoval = true)
+    public List<String> getPlayers(){
+        return players();
+    }
+    
+    /**
+     * Gets the currently set player count text of this ProfileEntry.
+     *
+     * @return The current player count text used by this ProfileEntry.
+     *
+     * @deprecated Use {@link #playerCountText() playerCountText()} instead.
+     */
+    @Deprecated(since = "2.1.0", forRemoval = true)
+    public String getPlayerCountText(){
+        return playerCountText();
+    }
+    
+    /**
+     * Gets the currently set favicon of this ProfileEntry.
+     * <br>Note that the favicon usually is and supports one of the following options:
+     * <ul>
+     *     <li>URL to a valid PNG file</li>
+     *     <li>File name (With .png extension) matching a file saved in the favicons folder of AdvancedServerList</li>
+     *     <li>{@code ${player uuid}} to display the avatar of the player.</li>
+     * </ul>
+     *
+     * @return The current favicon used by this ProfileEntry.
+     *
+     * @deprecated Use {@link #favicon() favicon()} instead.
+     */
+    @Deprecated(since = "2.1.0", forRemoval = true)
+    public String getFavicon(){
+        return favicon();
+    }
+    
+    /**
+     * Whether the player count should be hidden or not.
+     * <br>To get the actual boolean value, use {@link NullBool#getOrDefault(boolean) getValue(boolean)}.
+     *
+     * @return Whether the player count should be hidden or not.
+     *
+     * @deprecated Use {@link #hidePlayersEnabled() hidePlayersEnabled()} instead.
+     */
+    @Deprecated(since = "2.1.0", forRemoval = true)
+    public NullBool isHidePlayersEnabled(){
+        return hidePlayersEnabled();
+    }
+    
+    /**
+     * Whether the extra players feature should be used or not.
+     * <br>To get the actual boolean value, use {@link NullBool#getOrDefault(boolean) getValue(boolean)}.
+     *
+     * @return Whether the extra players feature should be used or not.
+     *
+     * @deprecated Use {@link #extraPlayersEnabled() extraPlayersEnabled()} instead.
+     */
+    @Deprecated(since = "2.1.0", forRemoval = true)
+    public NullBool isExtraPlayersEnabled(){
+        return extraPlayersEnabled();
+    }
+    
+    /**
+     * Gets the currently set number of extra players of this ProfileEntry.
+     *
+     * @return The current number of extra players used by this ProfileEntry.
+     *
+     * @deprecated Use {@link #extraPlayersCount() extraPlayersCount()} instead.
+     */
+    @Deprecated(since = "2.1.0", forRemoval = true)
+    public Integer getExtraPlayersCount(){
+        return extraPlayersCount();
     }
     
     /**
      * Whether this ProfileEntry is invalid or not.
      * <br>The ProfileEntry is considered invalid if all the following is true:
      * <ul>
-     *     <li>{@link #getMotd() motd} is empty</li>
-     *     <li>{@link #getPlayers() players} is empty</li>
-     *     <li>{@link #getPlayerCountText() playerCountText} is null/empty <b>and</b> {@link #isHidePlayersEnabled() hidePlayersEnabled} is false</li>
-     *     <li>{@link #getFavicon() favicon} is null/empty</li>
+     *     <li>{@link #motd() motd} is empty</li>
+     *     <li>{@link #players() players} is empty</li>
+     *     <li>{@link #playerCountText() playerCountText} is null/empty <b>and</b> {@link #hidePlayersEnabled () hidePlayersEnabled} is false</li>
+     *     <li>{@link #favicon() favicon} is null/empty</li>
      * </ul>
      * As long as one of the above is <b>not</b> true is this ProfileEntry considered valid.
      *
      * @return The current MOTD used by this ProfileEntry.
      */
     public boolean isInvalid(){
-        return getMotd().isEmpty() &&
-            getPlayers().isEmpty() &&
-            ((getPlayerCountText() == null || getPlayerCountText().isEmpty()) && !isHidePlayersEnabled().getOrDefault(false)) &&
-            (getFavicon() == null || getFavicon().isEmpty());
+        return motd().isEmpty() &&
+            players().isEmpty() &&
+            ((playerCountText() == null || playerCountText().isEmpty()) && !hidePlayersEnabled().getOrDefault(false)) &&
+            (favicon() == null || favicon().isEmpty());
     }
     
     /**
