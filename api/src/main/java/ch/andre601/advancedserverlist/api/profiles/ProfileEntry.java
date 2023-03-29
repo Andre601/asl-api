@@ -37,7 +37,7 @@ import java.util.List;
  * <br>The content may come from either the "profiles" list, the options in the file itself (global options) or a
  * mix of both.
  *
- * <p>This class is immutable. Use {@link #getBuilder() getBuilder()} to get a {@link Builder Builder instance} with the values
+ * <p>This class is immutable. Use {@link #builder() builder()} to get a {@link Builder Builder instance} with the values
  * of this class added.
  */
 public record ProfileEntry(List<String> motd, List<String> players, String playerCountText, String favicon,
@@ -93,23 +93,23 @@ public record ProfileEntry(List<String> motd, List<String> players, String playe
     /**
      * Creates a copy of this ProfileEntry instance.
      * 
-     * <p>This is simply a convenience method to not have to call {@link #getBuilder() getBuilder()}.{@link Builder#build() build()}:
+     * <p>This is simply a convenience method to not have to call {@link #builder() builder()}.{@link Builder#build() build()}:
      * <pre>{@code 
      * ProfileEntry entry = // Get entry instance
      * 
      * // Both do the same.
-     * ProfileEntry newEntry1 = entry.getBuilder().build();
+     * ProfileEntry newEntry1 = entry.builder().build();
      * ProfileEntry newEntry2 = entry.copy();
      * }</pre>
      * 
-     * If you want to modify the ProfileEntry should {@link #getBuilder() getBuilder()} be preferred.
+     * If you want to modify the ProfileEntry should {@link #builder() builder()} be preferred.
      * 
      * @return A copy of this ProfileEntry instance.
      * 
-     * @see #getBuilder() getBuilder()
+     * @see #builder() builder()
      */
     public ProfileEntry copy(){
-        return this.getBuilder().build();
+        return this.builder().build();
     }
     
     /**
@@ -118,7 +118,7 @@ public record ProfileEntry(List<String> motd, List<String> players, String playe
      *
      * @return A new {@link Builder Builder instance} with the values of this ProfileEntry set.
      */
-    public Builder getBuilder(){
+    public Builder builder(){
         return new Builder()
             .setMotd(motd())
             .setPlayers(players())
@@ -127,6 +127,19 @@ public record ProfileEntry(List<String> motd, List<String> players, String playe
             .setHidePlayersEnabled(hidePlayersEnabled())
             .setExtraPlayersEnabled(extraPlayersEnabled())
             .setExtraPlayerCount(extraPlayersCount());
+    }
+    
+    /**
+     * Creates a {@link Builder Builder instance} with the values from this ProfileEntry set.
+     * <br>Use this method if you would like to modify the ProfileEntry.
+     *
+     * @return A new {@link Builder Builder instance} with the values of this ProfileEntry set.
+     * 
+     * @deprecated Use {@link #builder() builder()} instead
+     */
+    @Deprecated(since = "2.1.0", forRemoval = true)
+    public Builder getBuilder(){
+        return builder();
     }
     
     /**
