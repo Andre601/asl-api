@@ -130,19 +130,6 @@ public record ProfileEntry(List<String> motd, List<String> players, String playe
     }
     
     /**
-     * Creates a {@link Builder Builder instance} with the values from this ProfileEntry set.
-     * <br>Use this method if you would like to modify the ProfileEntry.
-     *
-     * @return A new {@link Builder Builder instance} with the values of this ProfileEntry set.
-     * 
-     * @deprecated Use {@link #builder() builder()} instead
-     */
-    @Deprecated(since = "2.1.0", forRemoval = true)
-    public Builder getBuilder(){
-        return builder();
-    }
-    
-    /**
      * Gets the currently set MOTD of this ProfileEntry.
      *
      * @return The current MOTD used by this ProfileEntry.
@@ -218,6 +205,19 @@ public record ProfileEntry(List<String> motd, List<String> players, String playe
     @Override
     public Integer extraPlayersCount(){
         return extraPlayersCount;
+    }
+    
+    /**
+     * Creates a {@link Builder Builder instance} with the values from this ProfileEntry set.
+     * <br>Use this method if you would like to modify the ProfileEntry.
+     *
+     * @return A new {@link Builder Builder instance} with the values of this ProfileEntry set.
+     *
+     * @deprecated Use {@link #builder() builder()} instead
+     */
+    @Deprecated(since = "2.1.0", forRemoval = true)
+    public Builder getBuilder(){
+        return builder();
     }
     
     /**
