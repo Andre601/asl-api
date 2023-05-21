@@ -29,7 +29,7 @@ public enum NullBool{
     /**
      * Returns a NullBool instance based on the provided {@link java.lang.Boolean Boolean} value.
      * <br>In the case of {@code null} being provided will {@link #NOT_SET NullBool.NOT_SET} be returned, otherwise
-     * will the corresponding boolean value instance be returned.
+     * will the corresponding NullBool instance matching the Boolean value be returned.
      * 
      * @param  bool
      *         The {@link java.lang.Boolean Boolean} value to receive a NullBool instance for.

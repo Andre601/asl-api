@@ -208,111 +208,6 @@ public record ProfileEntry(List<String> motd, List<String> players, String playe
     }
     
     /**
-     * Creates a {@link Builder Builder instance} with the values from this ProfileEntry set.
-     * <br>Use this method if you would like to modify the ProfileEntry.
-     *
-     * @return A new {@link Builder Builder instance} with the values of this ProfileEntry set.
-     *
-     * @deprecated Use {@link #builder() builder()} instead
-     */
-    @Deprecated(since = "2.1.0", forRemoval = true)
-    public Builder getBuilder(){
-        return builder();
-    }
-    
-    /**
-     * Gets the currently set MOTD of this ProfileEntry.
-     *
-     * @return The current MOTD used by this ProfileEntry.
-     * 
-     * @deprecated Use {@link #motd() motd()} instead.
-     */
-    @Deprecated(since = "2.1.0", forRemoval = true)
-    public List<String> getMotd(){
-        return motd();
-    }
-    
-    /**
-     * Gets the currently set list of players of this ProfileEntry.
-     *
-     * @return The current list of players used by this ProfileEntry.
-     *
-     * @deprecated Use {@link #players() players()} instead.
-     */
-    @Deprecated(since = "2.1.0", forRemoval = true)
-    public List<String> getPlayers(){
-        return players();
-    }
-    
-    /**
-     * Gets the currently set player count text of this ProfileEntry.
-     *
-     * @return The current player count text used by this ProfileEntry.
-     *
-     * @deprecated Use {@link #playerCountText() playerCountText()} instead.
-     */
-    @Deprecated(since = "2.1.0", forRemoval = true)
-    public String getPlayerCountText(){
-        return playerCountText();
-    }
-    
-    /**
-     * Gets the currently set favicon of this ProfileEntry.
-     * <br>Note that the favicon usually is and supports one of the following options:
-     * <ul>
-     *     <li>URL to a valid PNG file</li>
-     *     <li>File name (With .png extension) matching a file saved in the favicons folder of AdvancedServerList</li>
-     *     <li>{@code ${player uuid}} to display the avatar of the player.</li>
-     * </ul>
-     *
-     * @return The current favicon used by this ProfileEntry.
-     *
-     * @deprecated Use {@link #favicon() favicon()} instead.
-     */
-    @Deprecated(since = "2.1.0", forRemoval = true)
-    public String getFavicon(){
-        return favicon();
-    }
-    
-    /**
-     * Whether the player count should be hidden or not.
-     * <br>To get the actual boolean value, use {@link NullBool#getOrDefault(boolean) getValue(boolean)}.
-     *
-     * @return Whether the player count should be hidden or not.
-     *
-     * @deprecated Use {@link #hidePlayersEnabled() hidePlayersEnabled()} instead.
-     */
-    @Deprecated(since = "2.1.0", forRemoval = true)
-    public NullBool isHidePlayersEnabled(){
-        return hidePlayersEnabled();
-    }
-    
-    /**
-     * Whether the extra players feature should be used or not.
-     * <br>To get the actual boolean value, use {@link NullBool#getOrDefault(boolean) getValue(boolean)}.
-     *
-     * @return Whether the extra players feature should be used or not.
-     *
-     * @deprecated Use {@link #extraPlayersEnabled() extraPlayersEnabled()} instead.
-     */
-    @Deprecated(since = "2.1.0", forRemoval = true)
-    public NullBool isExtraPlayersEnabled(){
-        return extraPlayersEnabled();
-    }
-    
-    /**
-     * Gets the currently set number of extra players of this ProfileEntry.
-     *
-     * @return The current number of extra players used by this ProfileEntry.
-     *
-     * @deprecated Use {@link #extraPlayersCount() extraPlayersCount()} instead.
-     */
-    @Deprecated(since = "2.1.0", forRemoval = true)
-    public Integer getExtraPlayersCount(){
-        return extraPlayersCount();
-    }
-    
-    /**
      * Whether this ProfileEntry is invalid or not.
      * <br>The ProfileEntry is considered invalid if all the following is true:
      * <ul>
@@ -471,7 +366,7 @@ public record ProfileEntry(List<String> motd, List<String> players, String playe
         
         /**
          * Sets the number of players to add to the online players to use as the new max players.
-         * <br>This option has no effect when {@link #isExtraPlayersEnabled() isExtraPlayersEnabled} is set to {@code false}.
+         * <br>This option has no effect when {@link #extraPlayersEnabled() isExtraPlayersEnabled} is set to {@code false}.
          * 
          * <p>Set this to {@code null} to not alter the max player count. Alternatively {@link #setExtraPlayersEnabled(NullBool) disable extra Players}.
          *
