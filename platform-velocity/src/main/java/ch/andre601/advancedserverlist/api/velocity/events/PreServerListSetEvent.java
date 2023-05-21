@@ -23,7 +23,7 @@
  *
  */
 
-package ch.andre601.advancedserverlist.velocity.events;
+package ch.andre601.advancedserverlist.api.velocity.events;
 
 import ch.andre601.advancedserverlist.api.events.GenericServerListEvent;
 import ch.andre601.advancedserverlist.api.internal.CheckUtil;

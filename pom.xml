@@ -15,13 +15,12 @@
         
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         
-        <api.version>2.1.0</api.version>
+        <api.version>3.0.0</api.version>
     </properties>
     
     <modules>
         <module>api</module>
         <module>platform-bungeecord</module>
-        <module>platform-spigot</module>
         <module>platform-velocity</module>
         <module>platform-bukkit</module>
     </modules>

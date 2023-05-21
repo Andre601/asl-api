@@ -1,4 +1,4 @@
-package ch.andre601.advancedserverlist.velocity.objects;
+package ch.andre601.advancedserverlist.api.velocity.objects;
 
 import ch.andre601.advancedserverlist.api.objects.GenericServer;
 import com.velocitypowered.api.proxy.server.RegisteredServer;

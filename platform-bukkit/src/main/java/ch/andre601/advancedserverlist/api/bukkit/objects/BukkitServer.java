@@ -1,4 +1,4 @@
-package ch.andre601.advancedserverlist.bukkit.objects;
+package ch.andre601.advancedserverlist.api.bukkit.objects;
 
 import ch.andre601.advancedserverlist.api.objects.GenericServer;
 import org.bukkit.World;

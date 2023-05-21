@@ -1,4 +1,4 @@
-package ch.andre601.advancedserverlist.bukkit.events;
+package ch.andre601.advancedserverlist.api.bukkit.events;
 
 
 import ch.andre601.advancedserverlist.api.events.GenericServerListEvent;

@@ -23,7 +23,7 @@
  *
  */
 
-package ch.andre601.advancedserverlist.bungeecord.events;
+package ch.andre601.advancedserverlist.api.bungeecord.events;
 
 import ch.andre601.advancedserverlist.api.internal.CheckUtil;
 import ch.andre601.advancedserverlist.api.profiles.ProfileEntry;
