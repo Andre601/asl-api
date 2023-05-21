@@ -23,6 +23,7 @@
         <module>platform-bungeecord</module>
         <module>platform-spigot</module>
         <module>platform-velocity</module>
+        <module>platform-bukkit</module>
     </modules>
     
     <build>

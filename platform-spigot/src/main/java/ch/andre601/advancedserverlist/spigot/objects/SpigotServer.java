@@ -5,6 +5,9 @@ import org.bukkit.World;
 
 import java.util.Map;
 
+/**
+ * @deprecated Use the platform-bukkit API instead.
+ */
 public interface SpigotServer extends GenericServer{
     /**
      * Returns a Map&lt;String, World&gt; where the key is the name of the World and the value the World of the Server.
