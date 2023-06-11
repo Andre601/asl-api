@@ -22,32 +22,19 @@
  * SOFTWARE.
  */
 
-package ch.andre601.advancedserverlist.api.objects;
+package ch.andre601.advancedserverlist.api.bungeecord.objects;
 
-/**
- * Simple class used to wrap around some generic server data such as online player count, amount of total players that
- * can join and the host (IP/Domain) that got pinged by the player.
- */
-public interface GenericServer{
-    
+import ch.andre601.advancedserverlist.api.objects.GenericServer;
+import net.md_5.bungee.api.config.ServerInfo;
+
+import java.util.Map;
+
+public interface BungeeProxy extends GenericServer{
     /**
-     * Returns the number of players currently online on the server.
+     * Returns a Map&lt;String, ServerInfo&gt; where the key is the name of the Server and the value the ServerInfo from
+     * the BungeeCord Proxy.
      *
-     * @return Number of players online on the server.
+     * @return Possibly-empty Map containing a Server name and ServerInfo instance.
      */
-    int getPlayersOnline();
-    
-    /**
-     * Returns the number of total players that can join the server.
-     *
-     * @return Number of total players that can join the server.
-     */
-    int getPlayersMax();
-    
-    /**
-     * Returns the IP/Domain that got pinged by the player.
-     *
-     * @return Possibly-null String containing the IP/Domain that got pinged by the player.
-     */
-    String getHost();
+    Map<String, ServerInfo> getServers();
 }

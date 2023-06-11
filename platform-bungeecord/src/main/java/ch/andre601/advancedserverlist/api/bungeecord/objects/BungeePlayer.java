@@ -22,32 +22,15 @@
  * SOFTWARE.
  */
 
-package ch.andre601.advancedserverlist.api.objects;
+package ch.andre601.advancedserverlist.api.bungeecord.objects;
+
+import ch.andre601.advancedserverlist.api.objects.GenericPlayer;
 
 /**
- * Simple class used to wrap around some generic server data such as online player count, amount of total players that
- * can join and the host (IP/Domain) that got pinged by the player.
+ * {@link GenericPlayer GenericPlayer instance} for the BungeeCord proxy implementation of AdvancedServerList.
+ *
+ * <p>To get an instance of this class from a GenericPlayer instance, simply cast it to a BungeePlayer (Granted that
+ * the GenericPlayer instance actually is a BungeePlayer instance).
  */
-public interface GenericServer{
-    
-    /**
-     * Returns the number of players currently online on the server.
-     *
-     * @return Number of players online on the server.
-     */
-    int getPlayersOnline();
-    
-    /**
-     * Returns the number of total players that can join the server.
-     *
-     * @return Number of total players that can join the server.
-     */
-    int getPlayersMax();
-    
-    /**
-     * Returns the IP/Domain that got pinged by the player.
-     *
-     * @return Possibly-null String containing the IP/Domain that got pinged by the player.
-     */
-    String getHost();
+public interface BungeePlayer extends GenericPlayer{
 }

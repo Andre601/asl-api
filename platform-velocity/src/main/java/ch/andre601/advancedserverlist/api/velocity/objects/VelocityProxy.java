@@ -22,32 +22,19 @@
  * SOFTWARE.
  */
 
-package ch.andre601.advancedserverlist.api.objects;
+package ch.andre601.advancedserverlist.api.velocity.objects;
 
-/**
- * Simple class used to wrap around some generic server data such as online player count, amount of total players that
- * can join and the host (IP/Domain) that got pinged by the player.
- */
-public interface GenericServer{
-    
+import ch.andre601.advancedserverlist.api.objects.GenericServer;
+import com.velocitypowered.api.proxy.server.RegisteredServer;
+
+import java.util.Map;
+
+public interface VelocityProxy extends GenericServer{
     /**
-     * Returns the number of players currently online on the server.
+     * Returns a Map&lt;String, RegisteredServer&gt; where the key is the name of the Server and the value the
+     * RegisteredServer from the Velocity Proxy.
      *
-     * @return Number of players online on the server.
+     * @return Possibly-empty Map containing a Server name and RegisteredServer instance.
      */
-    int getPlayersOnline();
-    
-    /**
-     * Returns the number of total players that can join the server.
-     *
-     * @return Number of total players that can join the server.
-     */
-    int getPlayersMax();
-    
-    /**
-     * Returns the IP/Domain that got pinged by the player.
-     *
-     * @return Possibly-null String containing the IP/Domain that got pinged by the player.
-     */
-    String getHost();
+    Map<String, RegisteredServer> getServers();
 }

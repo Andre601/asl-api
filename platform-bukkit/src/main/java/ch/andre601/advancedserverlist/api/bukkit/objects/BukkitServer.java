@@ -20,29 +20,28 @@
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
- *
  */
 
-package ch.andre601.advancedserverlist.velocity.objects;
+package ch.andre601.advancedserverlist.api.bukkit.objects;
 
-import ch.andre601.advancedserverlist.api.objects.GenericPlayer;
+import ch.andre601.advancedserverlist.api.objects.GenericServer;
+import org.bukkit.World;
+
+import java.util.Map;
 
 /**
- * {@link GenericPlayer GenericPlayer instance} for the Velocity proxy implementation of AdvancedServerList.
- * <br>Provides a {@link #getVersion() getVersion()} method to get the MC version used as a readable String (i.e. 1.19.3)
- * rather than just the protocol version.
- *
- * <p>To get an instance of this class from a GenericPlayer instance, simply cast it to a VelocityPlayer (Granted that
- * the GenericPlayer instance actually is a VelocityPlayer instance).
+ * Spigot/Paper specific instance of a {@link GenericServer GenericServer}.  
+ * <br>This interface includes a {@link #getWorlds() Map of Worlds} the Server currently has.
+ * 
+ * <p>This interface is useful for cases where you want to get the worlds of the Server itself, by simply casting
+ * your GenericServer instance to a BukkitServer one. Make sure to do proper instanceof checks first before attempting to
+ * cast.
  */
-public interface VelocityPlayer extends GenericPlayer{
-    
+public interface BukkitServer extends GenericServer{
     /**
-     * Returns the {@link #getProtocol() protocol version} in a readable MC version format (i.e. 1.19.3).
+     * Returns a Map&lt;String, World&gt; where the key is the name of the World and the value the World of the Server.
      *
-     * <p>This only works on Velocity and will return {@code null} for any other platform.
-     *
-     * @return The readable MC version the player uses.
+     * @return Possibly-empty Map containing a world name and World instance.
      */
-    String getVersion();
+    Map<String, World> getWorlds();
 }

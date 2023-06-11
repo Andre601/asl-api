@@ -22,32 +22,26 @@
  * SOFTWARE.
  */
 
-package ch.andre601.advancedserverlist.api.objects;
+package ch.andre601.advancedserverlist.api.velocity.objects;
+
+import ch.andre601.advancedserverlist.api.objects.GenericPlayer;
 
 /**
- * Simple class used to wrap around some generic server data such as online player count, amount of total players that
- * can join and the host (IP/Domain) that got pinged by the player.
+ * {@link GenericPlayer GenericPlayer instance} for the Velocity proxy implementation of AdvancedServerList.
+ * <br>Provides a {@link #getVersion() getVersion()} method to get the MC version used as a readable String (i.e. 1.19.3)
+ * rather than just the protocol version.
+ *
+ * <p>To get an instance of this class from a GenericPlayer instance, simply cast it to a VelocityPlayer (Granted that
+ * the GenericPlayer instance actually is a VelocityPlayer instance).
  */
-public interface GenericServer{
+public interface VelocityPlayer extends GenericPlayer{
     
     /**
-     * Returns the number of players currently online on the server.
+     * Returns the {@link #getProtocol() protocol version} in a readable MC version format (i.e. 1.19.3).
      *
-     * @return Number of players online on the server.
-     */
-    int getPlayersOnline();
-    
-    /**
-     * Returns the number of total players that can join the server.
+     * <p>This only works on Velocity and will return {@code null} for any other platform.
      *
-     * @return Number of total players that can join the server.
+     * @return The readable MC version the player uses.
      */
-    int getPlayersMax();
-    
-    /**
-     * Returns the IP/Domain that got pinged by the player.
-     *
-     * @return Possibly-null String containing the IP/Domain that got pinged by the player.
-     */
-    String getHost();
+    String getVersion();
 }
