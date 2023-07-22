@@ -17,8 +17,8 @@ dependencies {
     implementation 'ch.andre601.asl-api:api:{version}'
     
     // Optional platform-specific dependencies. Read more below
+    implementation 'ch.andre601.asl-api:platform-bukkit:{version}'
     implementation 'ch.andre601.asl-api:platform-bungeecord:{version}'
-    implementation 'ch.andre601.asl-api:platform-spigot:{version}'
     implementation 'ch.andre601.asl-api:platform-velocity:{version}'
 }
 ```
@@ -43,12 +43,12 @@ dependencies {
   <!-- Optional platform-specific dependencies. Read more below -->
   <dependency>
       <groupId>ch.andre601.asl-api</groupId>
-      <artifactId>platform-bungeecord</artifactId>
+      <artifactId>platform-bukkit</artifactId>
       <version>{version}</version>
   </dependency>
   <dependency>
       <groupId>ch.andre601.asl-api</groupId>
-      <artifactId>platform-spigot</artifactId>
+      <artifactId>platform-bungeecord</artifactId>
       <version>{version}</version>
   </dependency>
   <dependency>
