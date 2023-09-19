@@ -40,7 +40,8 @@ import java.util.List;
  * of this class added.
  */
 public record ProfileEntry(List<String> motd, List<String> players, String playerCountText, String favicon,
-                           NullBool hidePlayersEnabled, NullBool extraPlayersEnabled, Integer extraPlayersCount){
+                           NullBool hidePlayersEnabled, NullBool extraPlayersEnabled, NullBool maxPlayersEnabled,
+                           Integer extraPlayersCount, Integer maxPlayersCount){
     
     /**
      * Creates a new instance of a ProfileEntry with the given values.
@@ -68,6 +69,7 @@ public record ProfileEntry(List<String> motd, List<String> players, String playe
         CheckUtil.isNull("Players", players);
         CheckUtil.isNull("HidePlayersEnabled", hidePlayersEnabled);
         CheckUtil.isNull("ExtraPlayersEnabled", extraPlayersEnabled);
+        CheckUtil.isNull("MaxPlayersEnabled", maxPlayersEnabled);
     }
     
     /**
@@ -79,14 +81,16 @@ public record ProfileEntry(List<String> motd, List<String> players, String playe
      *     <li>{@link #favicon() favicon}: Empty String</li>
      *     <li>{@link #hidePlayersEnabled() hidePlayersEnabled}: {@link NullBool#NOT_SET NullBool.NOT_SET}</li>
      *     <li>{@link #extraPlayersEnabled() extraPlayersEnabled}: {@link NullBool#NOT_SET NullBool.NOT_SET}</li>
+     *     <li>{@link #maxPlayersEnabled() maxPlayersEnabled}: {@link NullBool#NOT_SET NullBoo.NOT_SET}</li>
      *     <li>{@link #extraPlayersCount() extraPlayersCount}: {@code null}</li>
+     *     <li>{@link #maxPlayersCount() maxPlayersCount}: {@code null}</li>
      * </ul>
      *
      * @return New ProfileEntry instance with empty/null values defined.
      */
     public static ProfileEntry empty(){
         return new ProfileEntry(Collections.emptyList(), Collections.emptyList(), "", "",
-            NullBool.NOT_SET, NullBool.NOT_SET, null);
+            NullBool.NOT_SET, NullBool.NOT_SET, NullBool.NOT_SET, null, null);
     }
     
     /**
@@ -125,7 +129,9 @@ public record ProfileEntry(List<String> motd, List<String> players, String playe
             .setFavicon(favicon())
             .setHidePlayersEnabled(hidePlayersEnabled())
             .setExtraPlayersEnabled(extraPlayersEnabled())
-            .setExtraPlayerCount(extraPlayersCount());
+            .setMaxPlayersEnabled(maxPlayersEnabled())
+            .setExtraPlayersCount(extraPlayersCount())
+            .setMaxPlayersCount(maxPlayersCount());
     }
     
     /**
@@ -197,6 +203,17 @@ public record ProfileEntry(List<String> motd, List<String> players, String playe
     }
     
     /**
+     * Whether the max players feature should be used or not.
+     * <br>To get the actual boolean value, use {@link NullBool#getOrDefault(boolean) getValue(boolean)}.
+     * 
+     * @return Whether the max players feature should be used or not.
+     */
+    @Override
+    public NullBool maxPlayersEnabled(){
+        return maxPlayersEnabled;
+    }
+    
+    /**
      * Gets the currently set number of extra players of this ProfileEntry.
      *
      * @return The current number of extra players used by this ProfileEntry.
@@ -204,6 +221,16 @@ public record ProfileEntry(List<String> motd, List<String> players, String playe
     @Override
     public Integer extraPlayersCount(){
         return extraPlayersCount;
+    }
+    
+    /**
+     * Gets the currently set number of max players of this ProfileEntry.
+     *
+     * @return The current number of max players used by this ProfileEntry.
+     */
+    @Override
+    public Integer maxPlayersCount(){
+        return maxPlayersCount;
     }
     
     /**
@@ -237,7 +264,9 @@ public record ProfileEntry(List<String> motd, List<String> players, String playe
         private String favicon = "";
         private NullBool hidePlayersEnabled = NullBool.NOT_SET;
         private NullBool extraPlayersEnabled = NullBool.NOT_SET;
+        private NullBool maxPlayersEnabled = NullBool.NOT_SET;
         private Integer extraPlayersCount = null;
+        private Integer maxPlayersCount = null;
         
         public Builder(){}
         
@@ -364,8 +393,28 @@ public record ProfileEntry(List<String> motd, List<String> players, String playe
         }
         
         /**
+         * Sets whether the max players feature should be enabled.
+         * 
+         * <p>Set to {@link NullBool#NOT_SET NullBool.NOT_SET} to not set this.
+         * 
+         * <p>An {@link java.lang.IllegalArgumentException IllegalArgumentException} may be thrown by the
+         * {@link CheckUtil CheckUtil} should maxPlayersEnabled be null.
+         * 
+         * @param  maxPlayersEnabled
+         *         Whether the extra players feature should be enabled or not.
+         * 
+         * @return This Builder after the NullBool has been set. Useful for chaining.
+         */
+        public Builder setMaxPlayersEnabled(NullBool maxPlayersEnabled){
+            CheckUtil.isNull("MaxPlayersEnabled", maxPlayersEnabled);
+            
+            this.maxPlayersEnabled = maxPlayersEnabled;
+            return this;
+        }
+        
+        /**
          * Sets the number of players to add to the online players to use as the new max players.
-         * <br>This option has no effect when {@link #extraPlayersEnabled() isExtraPlayersEnabled} is set to {@code false}.
+         * <br>This option has no effect when {@link #extraPlayersEnabled() extraPlayersEnabled} is set to {@code false}.
          * 
          * <p>Set this to {@code null} to not alter the max player count. Alternatively {@link #setExtraPlayersEnabled(NullBool) disable extra Players}.
          *
@@ -373,9 +422,45 @@ public record ProfileEntry(List<String> motd, List<String> players, String playe
          *         The number of extra players to add.
          *
          * @return This Builder after the extra player count has been set. Useful for chaining.
+         * 
+         * @deprecated Typo in the name. Use {@link #setExtraPlayersCount(Integer) setExtraPlayersCount(...)} instead.
          */
+        @Deprecated(since = "3.1.0", forRemoval = true)
         public Builder setExtraPlayerCount(Integer extraPlayersCount){
+            return setExtraPlayersCount(extraPlayersCount);
+        }
+        
+        /**
+         * Sets the number of players to add to the online players to use as the new max players.
+         * <br>This option has no effect when {@link #extraPlayersEnabled() extraPlayersEnabled} is set to
+         * {@link NullBool#FALSE NullBool.FALSE} or {@link NullBool#NOT_SET NullBool.NOT_SET}.
+         *
+         * <p>Set this to {@code null} to not alter the max player count. Alternatively {@link #setExtraPlayersEnabled(NullBool) disable extra Players}.
+         *
+         * @param  extraPlayersCount
+         *         The number of extra players to add.
+         *
+         * @return This Builder after the extra player count has been set. Useful for chaining.
+         */
+        public Builder setExtraPlayersCount(Integer extraPlayersCount){
             this.extraPlayersCount = extraPlayersCount;
+            return this;
+        }
+        
+        /**
+         * Sets the number of max players allowed to join this server.
+         * <br>This option has no effect when {@link #maxPlayersEnabled() maxPlayersEnabled} is set to
+         * {@link NullBool#FALSE NullBool.FALSE} or {@link NullBool#NOT_SET NullBool.NOT_SET}.
+         *
+         * <p>Set this to {@code null} to not alter the max player count. Alternatively {@link #setMaxPlayersEnabled(NullBool) disable max Players}.
+         *
+         * @param  maxPlayersCount
+         *         The number of max players to set.
+         *
+         * @return This Builder after the max player count has been set. Useful for chaining.
+         */
+        public Builder setMaxPlayersCount(Integer maxPlayersCount){
+            this.maxPlayersCount = maxPlayersCount;
             return this;
         }
         
@@ -385,7 +470,8 @@ public record ProfileEntry(List<String> motd, List<String> players, String playe
          * @return New {@link ProfileEntry ProfileEntry instance}.
          */
         public ProfileEntry build(){
-            return new ProfileEntry(motd, players, playerCountText, favicon, hidePlayersEnabled, extraPlayersEnabled, extraPlayersCount);
+            return new ProfileEntry(motd, players, playerCountText, favicon, hidePlayersEnabled, extraPlayersEnabled,
+                maxPlayersEnabled, extraPlayersCount, maxPlayersCount);
         }
     }
 }
