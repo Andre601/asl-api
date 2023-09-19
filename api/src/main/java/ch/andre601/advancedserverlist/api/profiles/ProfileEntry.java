@@ -59,8 +59,12 @@ public record ProfileEntry(List<String> motd, List<String> players, String playe
      *        Whether player count should be hidden.
      * @param extraPlayersEnabled
      *        Whether the extra players option should be enabled.
+     * @param maxPlayersEnabled
+     *        Whether the max players option should be enabled.
      * @param extraPlayersCount
      *        The number to add to the online players for the extra players.
+     * @param maxPlayersCount
+     *        The number to use for the max players count.
      * 
      * @see Builder ProfileEntry.Builder
      */
@@ -423,7 +427,7 @@ public record ProfileEntry(List<String> motd, List<String> players, String playe
          *
          * @return This Builder after the extra player count has been set. Useful for chaining.
          * 
-         * @deprecated Typo in the name. Use {@link #setExtraPlayersCount(Integer) setExtraPlayersCount(...)} instead.
+         * @deprecated Typo in the name. Use {@link #setExtraPlayersCount(Integer) setExtraPlayersCount(Integer)} instead.
          */
         @Deprecated(since = "3.1.0", forRemoval = true)
         public Builder setExtraPlayerCount(Integer extraPlayersCount){
