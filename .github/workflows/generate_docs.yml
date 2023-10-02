@@ -4,6 +4,14 @@ on:
   push:
     branches:
       - master
+    paths:
+      - '.github/workflows/generate_docs.yml'
+      - 'api/**'
+      - 'platform-bukkit/**'
+      - 'platform-bungeecord/**'
+      - 'platform-velocity/**'
+      - 'src/main/javadoc/**'
+      - 'pom.xml'
 
 permissions:
   contents: read
@@ -16,7 +24,7 @@ concurrency:
 
 jobs:
   buildDocs:
-    environments:
+    environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
