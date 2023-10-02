@@ -29,6 +29,12 @@ import net.md_5.bungee.api.config.ServerInfo;
 
 import java.util.Map;
 
+/**
+ * {@link GenericServer GenericServer instance} for the BungeeCord proxy implementation of AdvancedServerList.
+ * 
+ * <p>To get an instance of this class from a GenericServer instance, simply cast it to a BungeeProxy (Granted that
+ * the GenericProxy instance actually is a BungeeProxy instance).
+ */
 public interface BungeeProxy extends GenericServer{
     /**
      * Returns a Map&lt;String, ServerInfo&gt; where the key is the name of the Server and the value the ServerInfo from

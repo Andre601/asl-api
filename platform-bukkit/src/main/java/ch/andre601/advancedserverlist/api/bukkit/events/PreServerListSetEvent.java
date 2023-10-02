@@ -44,11 +44,22 @@ public abstract class PreServerListSetEvent extends Event implements GenericServ
     private ProfileEntry entry;
     private boolean cancelled;
     
+    /**
+     * Constructor for creating a new PreServerListSetEvent instance.
+     * 
+     * @param entry
+     *        The initial {@link ProfileEntry ProfileEntry} to use for this event.
+     */
     public PreServerListSetEvent(ProfileEntry entry){
         super(true);
         this.entry = entry;
     }
     
+    /**
+     * Static {@link HandlerList HandlerList} getter. Required by Spigot and Paper.
+     * 
+     * @return The static {@link HandlerList HandlerList instance} of this event.
+     */
     public static HandlerList getHandlerList(){
         return HANDLERS;
     }

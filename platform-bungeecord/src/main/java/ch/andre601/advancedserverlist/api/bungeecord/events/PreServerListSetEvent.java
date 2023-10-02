@@ -38,6 +38,12 @@ public abstract class PreServerListSetEvent extends Event implements GenericServ
     private ProfileEntry entry;
     private boolean cancelled;
     
+    /**
+     * Constructor for creating a new PreServerListSetEvent instance.
+     *
+     * @param entry
+     *        The initial {@link ProfileEntry ProfileEntry} to use for this event.
+     */
     public PreServerListSetEvent(ProfileEntry entry){
         this.entry = entry;
     }

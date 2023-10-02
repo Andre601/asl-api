@@ -272,6 +272,9 @@ public record ProfileEntry(List<String> motd, List<String> players, String playe
         private Integer extraPlayersCount = null;
         private Integer maxPlayersCount = null;
         
+        /**
+         * Empty Builder Constructor used to create a new instance of this class.
+         */
         public Builder(){}
         
         /**

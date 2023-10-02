@@ -22,21 +22,8 @@
  * SOFTWARE.
  */
 
-package ch.andre601.advancedserverlist.api.exceptions;
-
 /**
- * RuntimeException thrown whenever an invalid {@link ch.andre601.advancedserverlist.api.PlaceholderProvider PlaceholderProvider}
- * has been given.
+ * Velocity-specific API containing interfaces and classes specific for the Velocity version
+ * of AdvancedServerList.
  */
-public class InvalidPlaceholderProviderException extends RuntimeException{
-    
-    /**
-     * Basic constructor to create an instance of this Exception.
-     * 
-     * @param msg
-     *        The reason of the exception
-     */
-    public InvalidPlaceholderProviderException(String msg){
-        super(msg);
-    }
-}
+package ch.andre601.advancedserverlist.api.velocity;

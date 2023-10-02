@@ -42,7 +42,7 @@ public abstract class PlaceholderProvider{
     /**
      * Constructor used to set the identifier for the class extending the PlaceholderProvider class.
      *
-     * <h2>Example</h2>
+     * <h4>Example</h4>
      * <pre>{@code
      * public class MyPlaceholders extends PlaceholderProvider {
      *
