@@ -30,7 +30,7 @@
 
     <groupId>ch.andre601.advancedserverlist</groupId>
     <artifactId>asl-api</artifactId>
-    <version>1.0.0</version>
+    <version>3.1.0</version>
     <packaging>pom</packaging>
 
     <properties>
@@ -39,7 +39,7 @@
         
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         
-        <api.version>3.0.0</api.version>
+        <api.version>3.1.0</api.version>
     </properties>
     
     <modules>

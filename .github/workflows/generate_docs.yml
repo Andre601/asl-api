@@ -37,6 +37,7 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: '17'
+          cache: 'maven'
       - name: Build Javadocs
         run: 'mvn clean javadoc:aggregate'
       - name: Configure Pages
