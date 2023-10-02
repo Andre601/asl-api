@@ -1,6 +1,7 @@
 name: Build javadocs
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - master
