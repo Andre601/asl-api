@@ -74,40 +74,31 @@
                 <artifactId>maven-javadoc-plugin</artifactId>
                 <version>3.4.1</version>
                 <configuration>
-                    <addStylesheets>betterjdocs.css</addStylesheets>
+                    <stylesheetfile>.\betterjdocs.css</stylesheetfile>
                     <excludePackageNames>ch.andre601.advancedserverlist.api.internal</excludePackageNames>
                     <links>
                         <link>https://hub.spigotmc.org/javadocs/spigot/</link>
                     </links>
+                    <groups>
+                        <group>
+                            <title>Main API Module</title>
+                            <packages>ch.andre601.advancedserverlist.api*</packages>
+                        </group>
+                        <group>
+                            <title>platform-bukkit API Module</title>
+                            <packages>ch.andre601.advancedserverlist.api.bukkit*</packages>
+                        </group>
+                        <group>
+                            <title>platform-bungeecord API Module</title>
+                            <packages>ch.andre601.advancedserverlist.api.bungeecord*</packages>
+                        </group>
+                        <group>
+                            <title>platform-velocity API Module</title>
+                            <packages>ch.andre601.advancedserverlist.api.velocity*</packages>
+                        </group>
+                    </groups>
                 </configuration>
             </plugin>
         </plugins>
     </build>
-    
-    <!--
-    <reporting>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-javadoc-plugin</artifactId>
-                <version>3.4.1</version>
-                <reportSets>
-                    <reportSet>
-                        <id>aggregate</id>
-                        <inherited>false</inherited>
-                        <reports>
-                            <report>aggregate</report>
-                        </reports>
-                    </reportSet>
-                    <reportSet>
-                        <id>default</id>
-                        <reports>
-                            <report>javadoc</report>
-                        </reports>
-                    </reportSet>
-                </reportSets>
-            </plugin>
-        </plugins>
-    </reporting>
-    -->
 </project>
