@@ -74,7 +74,7 @@
                 <artifactId>maven-javadoc-plugin</artifactId>
                 <version>3.4.1</version>
                 <configuration>
-                    <stylesheetfile>.\betterjdocs.css</stylesheetfile>
+                    <stylesheetfile>betterjdocs.css</stylesheetfile>
                     <excludePackageNames>ch.andre601.advancedserverlist.api.internal</excludePackageNames>
                     <links>
                         <link>https://hub.spigotmc.org/javadocs/spigot/</link>
