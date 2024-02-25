@@ -28,12 +28,8 @@ import ch.andre601.advancedserverlist.api.objects.GenericPlayer;
 import ch.andre601.advancedserverlist.api.objects.GenericServer;
 
 /**
- * Abstract class that is used to provide your own Placeholder patterns for AdvancedServerList to parse.
- *
- * <p>In order for your class to be considered a valid PlaceholderProvider will you need to set the
- * {@link #identifier identifier} to a non-null, non-empty value without having any spaces in it.
- * <br>Once set, use {@link ch.andre601.advancedserverlist.api.AdvancedServerListAPI#addPlaceholderProvider(PlaceholderProvider) AdvancedServerListAPI#addPlaceholderProvider(PlaceholderProvider)}
- * to register your class for AdvancedServerList to use.
+ * Abstract class used to create Placeholders in the format <code>${identifier values}</code> with <code>identifier</code>
+ * being the name you provide through the {@link #PlaceholderProvider(String) Constructor}.
  */
 public abstract class PlaceholderProvider{
     
@@ -61,18 +57,19 @@ public abstract class PlaceholderProvider{
      * }</pre>
      *
      * @param identifier
-     *        The identifier to use for the placeholder. Shouldn't be null nor empty.
+     *        The identifier to use for the placeholder. Shouldn't be null, empty, nor contain spaces.
      */
     public PlaceholderProvider(String identifier){
         this.identifier = identifier;
     }
     
     /**
-     * Method called by AdvancedServerList's StringReplacer class to replace any appearances of
-     * {@code ${<identifier> <placeholder>}} with whatever value a PlaceholderProvider may return.
+     * This method is called by AdvancedServerList whenever a Placeholder pattern of <code>${identifier value}</code> is
+     * being found.
+     * <br>Your instance of the PlaceholderProvider class is only called when the identifier matches the one you provided.
      *
-     * <p>Returning {@code null} will be treated as an invalid placeholder, returning the full placeholder as-is without
-     * any changes made.
+     * <p>{@code null} can be returned to indicate the placeholder being invalid, having AdvancedServerList return the
+     * placeholder unchanged.
      *
      * @param  placeholder
      *         The part of the placeholder after the identifier ({@code ${<identifier> <placeholder>}}

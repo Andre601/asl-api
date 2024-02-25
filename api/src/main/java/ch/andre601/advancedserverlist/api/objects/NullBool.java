@@ -51,12 +51,15 @@ public enum NullBool{
     }
     
     /**
-     * Returns a NullBool instance based on the provided {@link java.lang.Boolean Boolean} value.
-     * <br>In the case of {@code null} being provided will {@link #NOT_SET NullBool.NOT_SET} be returned, otherwise
-     * will the corresponding NullBool instance matching the Boolean value be returned.
+     * Returns a NullBool instance based on the provided {@link Boolean} instance:
+     * <ul>
+     *     <li>{@code true}: {@link #TRUE NullBool.TRUE}</li>
+     *     <li>{@code false}: {@link #FALSE NullBool.FALSE}</li>
+     *     <li>{@code null}: {@link #NOT_SET NullBool.NOT_SET}</li>
+     * </ul>
      * 
      * @param  bool
-     *         The {@link java.lang.Boolean Boolean} value to receive a NullBool instance for.
+     *         Boolean to get a NullBool instance from.
      * 
      * @return NullBool instance based on the provided {@link java.lang.Boolean Boolean} value.
      */

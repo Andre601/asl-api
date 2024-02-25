@@ -25,8 +25,15 @@
 package ch.andre601.advancedserverlist.api.objects;
 
 /**
- * Simple class used to wrap around some generic server data such as online player count, amount of total players that
- * can join and the host (IP/Domain) that got pinged by the player.
+ * Interface used to share common information across all platforms.
+ * 
+ * <p>Platform-specific interfaces extending this one exist that may offer additional data.
+ * <br>This interface always offers data for the following:
+ * <ul>
+ *     <li>{@link #getPlayersOnline() Players online on a Proxy/Server}</li>
+ *     <li>{@link #getPlayersMax() Max players able to join a Proxy/Server}</li>
+ *     <li>{@link #getHost() IP/Domain pinged by the player}</li>
+ * </ul>
  */
 public interface GenericServer{
     

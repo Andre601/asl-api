@@ -41,6 +41,13 @@ public interface GenericServerListEvent{
     ProfileEntry getEntry();
     
     /**
+     * Returns whether this event has been cancelled or not.
+     *
+     * @return Whether the event has been cancelled or not.
+     */
+    boolean isCancelled();
+    
+    /**
      * Sets the new {@link ProfileEntry} to use.
      * <br>This may not be {@code null}.
      *
@@ -51,13 +58,6 @@ public interface GenericServerListEvent{
      *         When the provided ProfileEntry is null.
      */
     void setEntry(ProfileEntry entry);
-    
-    /**
-     * Returns whether this event has been cancelled or not.
-     *
-     * @return Whether the event has been cancelled or not.
-     */
-    boolean isCancelled();
     
     /**
      * Sets the event's cancel state.
