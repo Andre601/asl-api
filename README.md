@@ -1,5 +1,9 @@
 # AdvancedServerList API
 
+> [!IMPORTANT]
+> This repository has been archived and will no longer receive updates.  
+> For latest releases (And an updated way of getting this API) check out the [Codeberg Repository](https://codeberg.org/Andre601/asl-api).
+
 This repository was made to host the classes provided by the AdvancedServerList API introduced in v2 of the plugin itself.
 
 - [Get Dependencies](https://asl.andre601.ch/api/#add-dependency)
